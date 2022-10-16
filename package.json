@@ -1,7 +1,7 @@
 {
-  "name": "besidesprogramming.com",
+  "name": "themissingsemicolon.blog",
   "version": "1.0.0",
-  "description": "Client application for besidesprogramming.com",
+  "description": "Client application for themissingsemicolon.blog",
   "main": "index.js",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.6",
@@ -56,12 +56,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ice9js/besidesprogramming.com.git"
+    "url": "https://github.com/ice9js/andromeda"
   },
-  "author": "Kuba Birecki <kuba.birecki@besidesprogramming.com>",
+  "author": "Kuba Birecki <kuba.birecki@crystalplanet.io>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ice9js/besidesprogramming.com/issues"
+    "url": "https://github.com/ice9js/andromeda/issues"
   },
-  "homepage": "https://besidesprogramming.com"
+  "homepage": "https://themissingsemicolon.blog"
 }

@@ -6,7 +6,7 @@ const settings = {
 	app: {
 		name: 'The Missing Semicolon',
 		description: 'A software engineer\'s journal. By Kuba Birecki.',
-		host: 'besidesprogramming.localhost',
+		host: 'themissingsemicolon.local',
 		port: 3000,
 		gtmId: 'GTM-KN4FS4P',
 		disqusShortname: 'besidesprogramming-dev',
@@ -14,10 +14,10 @@ const settings = {
 		openGraphImage: 'https://themissingsemicolon.blog/andromeda/img/open-graph-default-image.png',
 	},
 	api: {
-		host: 'http://besidesprogramming-wp.local/wp-json',
+		host: 'http://andromeda.local/wp-json',
 	},
 	assets: {
-		host: 'https://besidesprogramming-wp.local',
+		host: 'https://andromeda.local',
 		paths: {
 			uploads: '/wp-content/uploads'
 		},
@@ -56,9 +56,9 @@ const settings = {
 			url: 'https://themissingsemicolon.blog/feed/',
 		},
 		{
-			icon: ['fab', 'slack-hash'],
-			title: 'Slack',
-			url: 'https://slackin.besidesprogramming.com/',
+			icon: ['fab', 'discord'],
+			title: 'Discord',
+			url: 'https://discord.gg/MdqDBXus2Q',
 		},
 		{
 			icon: ['fab', 'instagram'],

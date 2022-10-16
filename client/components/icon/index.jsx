@@ -6,9 +6,9 @@ import { dom, library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faFacebookF,
+	faDiscord,
 	faInstagram,
 	faPinterest,
-	faSlackHash,
 	faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -32,13 +32,13 @@ library.add(
 	faBars,
 	faEllipsisH,
 	faFacebookF,
+	faDiscord,
 	faInstagram,
 	faPinterest,
 	faRss,
 	faSearch,
 	faTimes,
 	faTwitter,
-	faSlackHash
 );
 
 export const getIconsCss = dom.css;

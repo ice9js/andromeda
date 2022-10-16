@@ -32,19 +32,19 @@ const settings = {
 
 		categories: {
 			thoughts: {
-				id: 2,
+				id: 8,
 				label: 'Thoughts',
 			},
 			programming: {
-				id: 3,
+				id: 9,
 				label: 'Programming',
 			},
 			travel: {
-				id: 4,
+				id: 10,
 				label: 'Travel',
 			},
 			photos: {
-				id: 5,
+				id: 11,
 				label: 'Photos',
 			},
 		},
