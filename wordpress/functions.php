@@ -84,7 +84,6 @@ add_filter( 'rest_prepare_post', function ( $response, $post, $request ) {
 	return $response;
 }, 10, 3 );
 
-
 function andromeda_get_post_images( $post_id ) {
 	$media = get_attached_media( 'image', $post_id );
 
@@ -96,49 +95,51 @@ function andromeda_get_post_images( $post_id ) {
 	);
 }
 
-register_rest_route( 'andromeda/v1', '/posts/(?P<slug>[a-zA-Z0-9-]+)/images', [
-	'methods' => [ 'GET' ],
-	'callback' => function ( $request ) {
-		// Get post by slug
-		$posts = get_posts( [
-			'name' => $request->get_param( 'slug' ),
-			'post_type' => 'post',
-			'post_status' => 'publish',
-			'numberposts' => 1,
-		] );
+add_action( 'init', function () {
+	register_rest_route( 'andromeda/v1', '/posts/(?P<slug>[a-zA-Z0-9-]+)/images', [
+		'methods' => [ 'GET' ],
+		'callback' => function ( $request ) {
+			// Get post by slug
+			$posts = get_posts( [
+				'name' => $request->get_param( 'slug' ),
+				'post_type' => 'post',
+				'post_status' => 'publish',
+				'numberposts' => 1,
+			] );
 
-		if ( empty( $posts ) ) {
-			return new WP_Error( 'resource_does_not_exist', __( 'No resource exists under this address.' ), [ 'status' => 404 ] );
-		}
+			if ( empty( $posts ) ) {
+				return new WP_Error( 'resource_does_not_exist', __( 'No resource exists under this address.' ), [ 'status' => 404 ] );
+			}
 
-		$post = array_shift( $posts );
+			$post = array_shift( $posts );
 
-		preg_match_all( '/<!-- wp:image (.*) -->/', $post->post_content, $matches );
-		$content_images = array_map( function ( $match ) {
-			return json_decode( $match );
-		}, $matches[ 1 ] );
+			preg_match_all( '/<!-- wp:image (.*) -->/', $post->post_content, $matches );
+			$content_images = array_map( function ( $match ) {
+				return json_decode( $match );
+			}, $matches[ 1 ] );
 
-		$gallery = array_filter( $content_images, function ( $image ) {
-			return $image &&
-				isset( $image->linkDestination ) &&
-				$image->linkDestination === 'attachment';
-		} );
+			$gallery = array_filter( $content_images, function ( $image ) {
+				return $image &&
+					isset( $image->linkDestination ) &&
+					$image->linkDestination === 'attachment';
+			} );
 
-		$post_images = andromeda_get_post_images( $post->ID );
-		return array_map( function ( $gallery_image ) use ( $post_images ) {
-			$image = $post_images[ $gallery_image->id ];
-			$meta = wp_get_attachment_metadata( $image->ID );
+			$post_images = andromeda_get_post_images( $post->ID );
+			return array_map( function ( $gallery_image ) use ( $post_images ) {
+				$image = $post_images[ $gallery_image->id ];
+				$meta = wp_get_attachment_metadata( $image->ID );
 
-			return [
-				'id' => $image->ID,
-				'slug' => $image->post_name,
-				'title' => $image->post_title,
-				'caption' => wp_get_attachment_caption( $image->ID ),
-				'width' => $meta[ 'width' ],
-				'height' => $meta[ 'height' ],
-				'file' => $meta[ 'file' ],
-				'meta' => $meta[ 'image_meta' ],
-			];
-		}, array_values( $gallery ) );
-	},
-] );
+				return [
+					'id' => $image->ID,
+					'slug' => $image->post_name,
+					'title' => $image->post_title,
+					'caption' => wp_get_attachment_caption( $image->ID ),
+					'width' => $meta[ 'width' ],
+					'height' => $meta[ 'height' ],
+					'file' => $meta[ 'file' ],
+					'meta' => $meta[ 'image_meta' ],
+				];
+			}, array_values( $gallery ) );
+		},
+	] );
+}, 10, 3 );
