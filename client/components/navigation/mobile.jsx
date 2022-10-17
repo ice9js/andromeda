@@ -40,7 +40,7 @@ const MobileNavigation = () => {
 		'is-expanded': showMenu,
 	} );
 
-	const navIcon = showMenu ? 'times' : 'bars';
+	const navIcon = showMenu ? 'xmark' : 'bars';
 
 	return (
 		<div className={ classes }>

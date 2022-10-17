@@ -37,7 +37,7 @@ const SearchForm = ( { defaultQuery } ) => {
 				value={ query }
 				onChange={ updateQuery } />
 			<button className="search-form__button" type="submit" title="Search">
-				<Icon icon="search" />
+				<Icon icon="magnifying-glass" />
 			</button>
 		</form>
 	);

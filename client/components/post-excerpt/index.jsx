@@ -19,7 +19,7 @@ const PostExcerpt = ( { post } ) => (
 		<div className="post-excerpt__actions">
 			<a className="post-excerpt__read-more" href={ `/${ post.slug }` }>
 				{ 'Continue reading' }
-				<Icon className="post-excerpt__read-more-icon" icon={ 'angle-double-right' } />
+				<Icon className="post-excerpt__read-more-icon" icon="angles-right" />
 			</a>
 		</div>
 	</div>

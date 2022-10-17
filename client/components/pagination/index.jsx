@@ -30,7 +30,7 @@ const Pagination = ( { currentPage, pages, paginationBase } ) => {
 				disabled={ currentPage === 1 }
 				className="pagination__button"
 				href={ formatPageUrl( paginationBase, currentPage - 1 ) }
-				icon={ <Icon icon="angle-double-left" /> }
+				icon={ <Icon icon="angles-left" /> }
 				label="Previous page" />
 
 			{ map( totalRange, ( n, index ) => (
@@ -43,7 +43,7 @@ const Pagination = ( { currentPage, pages, paginationBase } ) => {
 				disabled={ currentPage === pages }
 				className="pagination__button"
 				href={ formatPageUrl( paginationBase, currentPage + 1 ) }
-				icon={ <Icon icon="angle-double-right" /> }
+				icon={ <Icon icon="angles-right" /> }
 				label="Next page" />
 		</div>
 	);

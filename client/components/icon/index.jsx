@@ -14,12 +14,12 @@ import {
 import {
 	faArrowLeft,
 	faArrowRight,
-	faAngleDoubleLeft,
-	faAngleDoubleRight,
+	faAnglesLeft,
+	faAnglesRight,
 	faBars,
 	faEllipsisH,
+	faMagnifyingGlass,
 	faRss,
-	faSearch,
 	faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -27,16 +27,16 @@ import {
 library.add(
 	faArrowLeft,
 	faArrowRight,
-	faAngleDoubleLeft,
-	faAngleDoubleRight,
+	faAnglesLeft,
+	faAnglesRight,
 	faBars,
 	faEllipsisH,
 	faFacebookF,
 	faDiscord,
 	faInstagram,
+	faMagnifyingGlass,
 	faPinterest,
 	faRss,
-	faSearch,
 	faTimes,
 	faTwitter,
 );

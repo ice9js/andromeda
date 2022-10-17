@@ -74,7 +74,7 @@ const ImagePreview = ( { image, nextUrl, onClose, previousUrl } ) => {
 			<nav>
 				<button className="image-preview__button image-preview__button-close" onClick={ onClose }>
 					<ScreenReaderText>Close image preview</ScreenReaderText>
-					<Icon icon="times" />
+					<Icon icon="xmark" />
 				</button>
 
 				{ previousUrl && (
