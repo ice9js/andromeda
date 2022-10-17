@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { decode } from 'he';
 
 /**
  * Internal dependencies
@@ -23,25 +24,25 @@ const PostFooter = ( { image, link, next, previous, title } ) => (
 				className={ 'twitter' }
 				icon={ <Icon icon={ [ 'fab', 'twitter' ] } /> }
 				label={ 'Tweet' }
-				url={ twitterShareUrl( link, title ) } />
+				url={ twitterShareUrl( link, decode( title ) ) } />
 			<ShareButton
 				className={ 'pinterest' }
 				icon={ <Icon icon={ [ 'fab', 'pinterest' ] } /> }
 				label={ 'Pin' }
-				url={ pinterestShareUrl( link, title, image ) } />
+				url={ pinterestShareUrl( link, decode( title ), image ) } />
 		</div>
 
 		<div className="post-footer__links">
 			{ next && (
 				<a className="post-footer__link is-next" href={ `/${ next.slug }`}>
 					<span className="post-footer__link-label">{ 'next' }</span>
-					<span className="post-footer__link-title">{ next.title }</span>
+					<span className="post-footer__link-title">{ decode( next.title ) }</span>
 				</a>
 			) }
 			{ previous && (
 				<a className="post-footer__link is-prev" href={ `/${ previous.slug }`}>
 					<span className="post-footer__link-label">{ 'previous' }</span>
-					<span className="post-footer__link-title">{ previous.title }</span>
+					<span className="post-footer__link-title">{ decode( previous.title ) }</span>
 				</a>
 			) }
 		</div>

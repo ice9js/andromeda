@@ -4,16 +4,17 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { trimEnd } from 'lodash';
+import { decode } from 'he';
 
 /**
  * Internal dependencies
  */
 import DisqusThread from 'components/disqus-thread';
-import ErrorView from 'views/error';
 import PostContent from 'components/post-content';
 import PostFooter from 'components/post-footer';
 import PostHeader from 'components/post-header';
 import PostPlaceholder from 'components/post-placeholder';
+import ErrorView from 'views/error';
 import { config } from 'config';
 
 const Post = ( { error, loading, post } ) => {
@@ -32,13 +33,21 @@ const Post = ( { error, loading, post } ) => {
 	return (
 		<React.Fragment>
 			<Helmet>
-				<title>{ `${ post.title }`  }</title>
-				<meta name="description" content={ post.excerpt.replace( /(<[^<]*>)/gi, '' ) } />
+				<title>{ decode( post.title )  }</title>
+				<meta
+					name="description"
+					content={ decode( post.excerpt.replace( /(<[^<]*>)/gi, '' ) ) }
+				/>
 
 				<meta property="og:type" content="article" />
 				<meta property="og:url" content={ trimEnd( post.link, '/' ) } />
-				<meta property="og:title" content={ post.title } />
-				<meta property="og:description" content={ post.excerpt.replace( /(<[^<]*>)/gi, '' ) } />
+				<meta property="og:title" content={ decode( post.title ) } />
+				<meta
+					property="og:description"
+					content={
+						decode( post.excerpt.replace( /(<[^<]*>)/gi, '' ) )
+					}
+				/>
 				<meta property="og:image" content={ post.image || config( 'app.openGraphImage' ) } />
 				<meta property="article:published_time" content={ post.date } />
 				<meta property="article:modified_time" content={ post.modified } />
