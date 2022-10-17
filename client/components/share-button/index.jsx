@@ -14,7 +14,7 @@ const ShareButton = ( { className, compact, icon, label, url } ) => {
 	const buttonClass = classNames( 'share-button', className, { 'is-compact': compact } );
 
 	return (
-		<a className={ buttonClass } href={ url } rel="noopener" target="_blank">
+		<a className={ buttonClass } href={ url } rel="noopener noreferrer" target="_blank">
 			{ icon }
 			{ ! compact && (
 				<span className="share-button__label">{ label }</span>

@@ -11,7 +11,7 @@ import Icon from 'components/icon';
 import ScreenReaderText from 'components/screen-reader-text';
 
 const SocialButton = ( { icon, title, url } ) => (
-	<a className="social-button" href={ url } rel="noopener" target="_blank">
+	<a className="social-button" href={ url } rel="noopener noreferrer" target="_blank">
 		<ScreenReaderText>{ `${ title } (Opens in a new window)` }</ScreenReaderText>
 		<Icon icon={ icon } />
 	</a>

@@ -12,6 +12,7 @@ const settings = {
 		disqusShortname: 'besidesprogramming-dev',
 		twitterHandle: '@ice9js',
 		openGraphImage: 'https://themissingsemicolon.blog/andromeda/img/open-graph-default-image.png',
+		pinterestDefaultImage: 'https://themissingsemicolon.blog/andromeda/img/open-graph-default-image.png',
 	},
 	api: {
 		host: 'http://andromeda.local/wp-json',

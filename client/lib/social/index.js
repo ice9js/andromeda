@@ -1,3 +1,5 @@
+import { config } from 'config';
+
 /**
  * Returns a share link for Pinterest
  *
@@ -14,7 +16,7 @@ export const facebookShareUrl = ( url ) => `https://www.facebook.com/sharer/shar
  * @return {String}
  */
 export const twitterShareUrl = ( url, title ) =>
-	`https://twitter.com/intent/tweet?url=${ url };via=ice9js;text=${ title };&amp;count=none`;
+	`https://twitter.com/intent/tweet?url=${ url };text=${ title }`;
 
 /**
  * Returns a share link for Pinterest
@@ -24,5 +26,8 @@ export const twitterShareUrl = ( url, title ) =>
  * @param  {String} image
  * @return {String}
  */
-export const pinterestShareUrl = ( url, title, image ) =>
-	`https://pinterest.com/pin/create/button/?url=${ url }&media=${ image }&description=${ title }`;
+export const pinterestShareUrl = ( url, title, image ) => {
+    const imageUrl = image || config( 'app.pinterestDefaultImage' );
+
+    return `https://pinterest.com/pin/create/button/?url=${ url }&media=${ imageUrl }&description=${ title }`;
+};
