@@ -45,26 +45,26 @@ const App = () => {
 
 			<main className="app__content">
 				<Routes>
-					<Route
-						path="/"
-						element={ <Home /> }
-					/>
-					<Route
-						path="/:category(thoughts|programming|travel|photos)/:page(\d+)?"
-						element={ <Category /> }
-					/>
-					<Route
-						path="/all/:page(\d+)?"
-						element={ <Archive /> }
-					/>
-					<Route
-						path="/search"
-						element={ <Search /> }
-					/>
-					<Route
-						path="/:slug/*"
-						element={ <Post /> }
-					/>
+					<Route path="/" element={ <Home /> } />
+
+					<Route path="/thoughts" element={ <Category categorySlug="thoughts" /> } />
+					<Route path="/thoughts/:page" element={ <Category categorySlug="thoughts" /> } />
+
+					<Route path="/programming" element={ <Category categorySlug="programming" /> } />
+					<Route path="/programming/:page" element={ <Category categorySlug="programming" /> } />
+
+					<Route path="/travel" element={ <Category categorySlug="travel" /> } />
+					<Route path="/travel/:page" element={ <Category categorySlug="travel" /> } />
+
+					<Route path="/photos" element={ <Category categorySlug="photos" /> } />
+					<Route path="/photos/:page" element={ <Category categorySlug="photos" /> } />
+
+					<Route path="/all" element={ <Archive /> } />
+					<Route path="/all/:page" element={ <Archive /> } />
+
+					<Route path="/search" element={ <Search /> } />
+
+					<Route path="/:slug/*" element={ <Post /> } />
 				</Routes>
 			</main>
 		</div>

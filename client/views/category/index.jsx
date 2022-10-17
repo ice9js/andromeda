@@ -20,11 +20,11 @@ const postsPerPage = config( 'posts.perPage' );
 
 const categoryUrl = ( category ) => `/${ category }/{{pageNumber}}`;
 
-const Category = ( props ) => {
+const Category = ( { categorySlug, ...props } ) => {
 	const params = useParams();
 
 	const page = ( params.page && parseInt( params.page, 10 ) ) || 1;
-	const category = categories[ params.category ];
+	const category = categories[ categorySlug ];
 	const query = {
 		categories: [ category.id ],
 		per_page: postsPerPage,
@@ -35,7 +35,7 @@ const Category = ( props ) => {
 		<React.Fragment>
 			<HeaderMeta
 				title={ `${ category.label } - Page ${ page }` }
-				url={ `${ config( 'app.host' ) }/${ match.params.category }/${ page }` }
+				url={ `${ config( 'app.host' ) }/${ categorySlug }/${ page }` }
 			/>
 
 			<PageHeader text={ category.label } />
@@ -43,7 +43,7 @@ const Category = ( props ) => {
 			<QueryPosts query={ query } />
 			<PostsFeed
 				currentPage={ page }
-				paginationBase={ categoryUrl( match.params.category ) }
+				paginationBase={ categoryUrl( categorySlug ) }
 				{ ...props }
 			/>
 		</React.Fragment>
