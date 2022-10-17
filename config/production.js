@@ -57,9 +57,9 @@ const settings = {
 			url: 'https://themissingsemicolon.blog/feed/',
 		},
 		{
-			icon: ['fab', 'slack-hash'],
-			title: 'Slack',
-			url: 'https://slackin.themissingsemicolon.blog/',
+			icon: ['fab', 'discord'],
+			title: 'Discord',
+			url: 'https://discord.gg/MdqDBXus2Q',
 		},
 		{
 			icon: ['fab', 'instagram'],
