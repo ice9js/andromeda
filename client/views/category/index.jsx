@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 /**
  * Internal dependencies
@@ -19,9 +20,11 @@ const postsPerPage = config( 'posts.perPage' );
 
 const categoryUrl = ( category ) => `/${ category }/{{pageNumber}}`;
 
-const Category = ( { match, ...props } ) => {
-	const page = ( match.params.page && parseInt( match.params.page ) ) || 1;
-	const category = categories[ match.params.category ];
+const Category = ( props ) => {
+	const params = useParams();
+
+	const page = ( params.page && parseInt( params.page, 10 ) ) || 1;
+	const category = categories[ params.category ];
 	const query = {
 		categories: [ category.id ],
 		per_page: postsPerPage,
@@ -41,7 +44,8 @@ const Category = ( { match, ...props } ) => {
 			<PostsFeed
 				currentPage={ page }
 				paginationBase={ categoryUrl( match.params.category ) }
-				{ ...props } />
+				{ ...props }
+			/>
 		</React.Fragment>
 	);
 };

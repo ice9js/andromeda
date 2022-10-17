@@ -29,8 +29,7 @@
 }
 
 .image-preview__caption {
-	color: $color-white;
-	color: var( --color-text-inverted );
+	color: var( --color-text-subtle );
 	display: none;
 	height: 40px;
 	line-height: 40px;

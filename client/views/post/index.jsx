@@ -2,8 +2,9 @@
  * External dependencies
  */
 import React, { Fragment } from 'react';
-import { Route } from 'react-router';
-import { connect } from 'react-redux';
+import { Route, Routes } from 'react-router';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 /**
  * Internal dependencies
@@ -13,8 +14,14 @@ import QueryPosts from 'components/data/query-posts';
 import { getPostsError, getPostsLoadingStatus, getPost } from 'state/posts/selectors';
 import Gallery from './gallery';
 
-const Post = ( { match, post, ...props } ) => {
-	const { slug } = match.params;
+const Post = () => {
+	const { slug } = useParams();
+
+	const [ error, loading, post ] = useSelector( ( state ) => [
+		getPostsError( state ),
+		getPostsLoadingStatus( state ),
+		getPost( state, slug ),
+	] );
 
 	const query = {
 		_embed: true,
@@ -26,19 +33,16 @@ const Post = ( { match, post, ...props } ) => {
 		<Fragment>
 			<QueryPosts query={ query } />
 
-			<PostComponent post={ post } { ...props } />
+			<PostComponent post={ post } loading={ loading } error={ error } />
 
-			<Route
-				path={ `${ match.path }/images/:imageId` }
-				render={ ( props ) => <Gallery postSlug={ slug } { ...props } /> } />
+			<Routes>
+				<Route
+					path={ `images/:imageId` }
+					element={ <Gallery postSlug={ slug } /> }
+				/>
+			</Routes>
 		</Fragment>
 	);
 };
 
-export default connect(
-	( state, { match } ) => ( {
-		error: getPostsError( state ),
-		loading: getPostsLoadingStatus( state ),
-		post: getPost( state, match.params.slug ),
-	} )
-)( Post );
+export default Post;

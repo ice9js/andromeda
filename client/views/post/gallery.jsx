@@ -4,9 +4,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { Redirect } from 'react-router';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 /**
  * Internal dependencies
@@ -21,12 +21,30 @@ import {
 	isPostMediaRequested
 } from 'state/media/selectors';
 
-const Gallery = ( { history, currentImage, loading, nextImage, previousImage, postSlug, requested } ) => {
-	if ( requested && ! loading && ! currentImage ) {
-		return <Redirect to={ `/${ postSlug }` } />;
-	}
+const Gallery = ( { postSlug } ) => {
+	const { imageId } = useParams();
 
-	const redirectToPost = () => history.push( `/${ postSlug }` );
+	const navigate = useNavigate();
+
+	const [
+		currentImage,
+		loading,
+		nextImage,
+		previousImage,
+		requested
+	] = useSelector( ( state ) => [
+		getPostImage( state, postSlug, parseInt( imageId, 10 ) ),
+		isPostMediaLoading( state, postSlug ),
+		getNextPostImage( state, postSlug, parseInt( imageId, 10 ) ),
+		getPreviousPostImage( state, postSlug, parseInt( imageId, 10 ) ),
+		isPostMediaRequested( state, postSlug ),
+	] );
+
+	const redirectToPost = () => navigate( `/${ postSlug }` );
+
+	if ( requested && ! loading && ! currentImage ) {
+		return <Navigate to={ `/${ postSlug }` } replace />;
+	}
 
 	return (
 		<React.Fragment>
@@ -51,14 +69,4 @@ Gallery.propTypes = {
 	postSlug: PropTypes.string.isRequired,
 };
 
-const connectComponent = connect(
-	( state, { match, postSlug } ) => ( {
-		currentImage: getPostImage( state, postSlug, parseInt( match.params.imageId ) ),
-		loading: isPostMediaLoading( state, postSlug ),
-		nextImage: getNextPostImage( state, postSlug, parseInt( match.params.imageId ) ),
-		previousImage: getPreviousPostImage( state, postSlug, parseInt( match.params.imageId ) ),
-		requested: isPostMediaRequested( state, postSlug ),
-	} )
-);
-
-export default withRouter( connectComponent( Gallery ) );
+export default Gallery;

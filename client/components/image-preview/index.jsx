@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useGesture } from 'react-use-gesture';
-import { withRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Internal dependencies
@@ -14,9 +14,11 @@ import Icon from 'components/icon';
 import ScreenReaderText from 'components/screen-reader-text';
 import { getImageUrl, getSizes, getSrcSet } from './utils';
 
-const ImagePreview = ( { history, image, nextUrl, onClose, previousUrl } ) => {
+const ImagePreview = ( { image, nextUrl, onClose, previousUrl } ) => {
 	const [ showControls, setShowControls ] = useState( true );
 	const preview = useRef( null );
+
+	const navigate = useNavigate();
 
 	// Disable window scrolling while preview is active
 	useEffect( () => {
@@ -38,12 +40,12 @@ const ImagePreview = ( { history, image, nextUrl, onClose, previousUrl } ) => {
 
 			// Swipe left - next image
 			if ( nextUrl && last && Math.abs( vy ) < 0.3 && vx < -0.3 ) {
-				return history.push( nextUrl );
+				return navigate( nextUrl );
 			}
 
 			// Swipe right - previous image
 			if ( previousUrl && last && Math.abs( vy ) < 0.3 && vx > 0.3 ) {
-				return history.push( previousUrl );
+				return navigate( previousUrl );
 			}
 		},
 		onPinch: ( state ) => {
@@ -101,4 +103,4 @@ ImagePreview.propTypes = {
 	previous: PropTypes.string,
 };
 
-export default withRouter( ImagePreview );
+export default ImagePreview;

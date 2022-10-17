@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 /**
  * Internal dependencies
@@ -16,8 +17,10 @@ import { getAllPosts, getPostsError, getPostsLoadingStatus, getPostsTotal, getPo
 
 const postsPerPage = config( 'posts.perPage' );
 
-const Archive = ( { match, ...props } ) => {
-	const page = ( match.params.page && parseInt( match.params.page ) ) || 1;
+const Archive = ( props ) => {
+	const params = useParams();
+
+	const page = ( params.page && parseInt( params.page, 10 ) ) || 1;
 	const query = {
 		per_page: postsPerPage,
 		offset: ( page - 1 ) * postsPerPage,
@@ -36,7 +39,8 @@ const Archive = ( { match, ...props } ) => {
 			<PostsFeed
 				currentPage={ page }
 				paginationBase="/all/{{pageNumber}}"
-				{ ...props } />
+				{ ...props }
+			/>
 		</React.Fragment>
 	);
 };

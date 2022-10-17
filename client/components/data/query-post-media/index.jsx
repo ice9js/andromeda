@@ -3,7 +3,7 @@
  */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 /**
  * Internal dependencies
@@ -11,21 +11,18 @@ import { connect } from 'react-redux';
 import { fetchPostImages } from 'data/besidesprogramming/media';
 import { requestPostMedia, requestPostMediaError, updatePostMedia } from 'state/media/actions';
 
-const QueryPostMedia = ( {
-	postSlug,
-	requestPostMedia,
-	requestPostMediaError,
-	updatePostMedia,
-} ) => {
+const QueryPostMedia = ( { postSlug } ) => {
 	const [ currentPostSlug, setCurrentPostSlug ] = useState( '' );
 
+	const dispatch = useDispatch();
+
 	if ( postSlug && postSlug !== currentPostSlug ) {
-		requestPostMedia( postSlug );
+		dispatch(requestPostMedia( postSlug ));
 
 		fetchPostImages(
 			postSlug,
-			( { media } ) => updatePostMedia( postSlug, media ),
-			() => requestPostMediaError( postSlug )
+			( { media } ) => dispatch(updatePostMedia( postSlug, media )),
+			() => dispatch(requestPostMediaError( postSlug ))
 		);
 
 		setCurrentPostSlug( postSlug );
@@ -38,7 +35,4 @@ QueryPostMedia.propTypes = {
 	postSlug: PropTypes.string.isRequired,
 };
 
-export default connect(
-	null,
-	{ requestPostMedia, requestPostMediaError, updatePostMedia }
-)( QueryPostMedia );
+export default QueryPostMedia;

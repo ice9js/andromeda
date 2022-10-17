@@ -4,6 +4,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
+import { useLocation, useParams } from 'react-router-dom';
 import { get } from 'lodash';
 
 /**
@@ -21,7 +22,10 @@ const postsPerPage = config( 'posts.perPage' );
 
 const searchUrl = ( search ) => `/search?q=${ encodeURIComponent( search ) }&p={{pageNumber}}`;
 
-const Search = ( { location, match, ...props } ) => {
+const Search = ( props ) => {
+	const location = useLocation();
+	const params = useParams();
+
 	const values = parseQuery( location.search );
 	const search = values.q || '';
 	const page = parseInt( values.p ) || 1;
@@ -42,7 +46,7 @@ const Search = ( { location, match, ...props } ) => {
 			</Helmet>
 
 			<PageHeader text="Search" />
-			<SearchForm query={ search } />
+			<SearchForm defaultQuery={ search } />
 
 			{ search && (
 				<React.Fragment>

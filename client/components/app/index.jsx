@@ -1,11 +1,10 @@
 /**
  * External dependencies
  */
-import React, { PureComponent } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch } from 'react-router';
-import { withRouter } from 'react-router-dom';
-import { thru } from 'lodash';
+import { Route, Routes } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Internal dependencies
@@ -19,49 +18,57 @@ import Post from 'views/post';
 import Search from 'views/search';
 import { getLink, isLocalLink } from './utils';
 
-class App extends PureComponent {
+const App = () => {
+	const navigate = useNavigate();
 
-	static propTypes = {
-		history: PropTypes.shape( {
-			push: PropTypes.func.isRequired,
-		} ).isRequired,
-	};
-
-	componentDidMount() {
-		window && window.addEventListener( 'click', this.handleClick );
-	}
-
-	componentWillUnmount() {
-		window && window.removeEventListener( 'click', this.handleClick );
-	}
-
-	handleClick = ( event ) => {
+	const handleClick = ( event ) => {
 		const link = getLink( event.target );
 
 		if ( link && isLocalLink( link ) ) {
 			event.preventDefault();
-			this.props.history.push( thru( new URL( link.href ), ( url ) => url.pathname ) );
+			navigate( new URL( link.href ).pathname );
 		}
 	};
 
-	render() {
-		return (
-			<div className="app">
-				<Navigation />
-				<MobileNavigation />
+	useEffect( () => {
+		window && window.addEventListener( 'click', handleClick );
 
-				<main className="app__content">
-					<Switch>
-						<Route path="/" exact component={ Home } />
-						<Route path="/:category(thoughts|programming|travel|photos)/:page(\d+)?" exact component={ Category } />
-						<Route path="/all/:page(\d+)?" exact component={ Archive } />
-						<Route path="/search" exact component={ Search } />
-						<Route path="/:slug" component={ Post } />
-					</Switch>
-				</main>
-			</div>
-		);
-	}
-}
+		return () => {
+			window && window.removeEventListener( 'click', handleClick );
+		};
+	}, [] );
 
-export default withRouter( App );
+	return (
+		<div className="app">
+			<Navigation />
+			<MobileNavigation />
+
+			<main className="app__content">
+				<Routes>
+					<Route
+						path="/"
+						element={ <Home /> }
+					/>
+					<Route
+						path="/:category(thoughts|programming|travel|photos)/:page(\d+)?"
+						element={ <Category /> }
+					/>
+					<Route
+						path="/all/:page(\d+)?"
+						element={ <Archive /> }
+					/>
+					<Route
+						path="/search"
+						element={ <Search /> }
+					/>
+					<Route
+						path="/:slug/*"
+						element={ <Post /> }
+					/>
+				</Routes>
+			</main>
+		</div>
+	);
+};
+
+export default App;

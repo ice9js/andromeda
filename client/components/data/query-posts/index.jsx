@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { isEqual } from 'lodash';
 
 /**
@@ -13,21 +13,22 @@ import { fetchPosts } from 'data/besidesprogramming/posts';
 import { requestPosts, requestPostsError, updatePosts } from 'state/posts/actions';
 import { getPostsLoadingStatus, getPostsError, getQuery } from 'state/posts/selectors';
 
-const QueryPosts = ( {
-	lastQuery,
-	error,
-	loading,
-	query,
-	requestPosts,
-	requestPostsError,
-	updatePosts
-} ) => {
+const QueryPosts = ( { query } ) => {
+	const dispatch = useDispatch();
+
+	const [ lastQuery, error, loading ] = useSelector( ( state ) => [
+		getQuery( state ),
+		getPostsError( state ),
+		getPostsLoadingStatus( state ),
+	] );
+
 	if ( ! isEqual( query, lastQuery ) && ! loading ) {
-		requestPosts( query );
+		dispatch(requestPosts( query ));
+
 		fetchPosts(
 			query,
-			( { items, total, totalPages } ) => updatePosts( items, total, totalPages ),
-			( error ) => requestPostsError( error.status )
+			( { items, total, totalPages } ) => dispatch(updatePosts( items, total, totalPages )),
+			( error ) => dispatch(requestPostsError( error.status ))
 		);
 	}
 
@@ -38,11 +39,4 @@ QueryPosts.propTypes = {
 	query: PropTypes.object,
 };
 
-export default connect(
-	( state ) => ( {
-		lastQuery: getQuery( state ),
-		error: getPostsError( state ),
-		loading: getPostsLoadingStatus( state ),
-	} ),
-	{ requestPosts, requestPostsError, updatePosts }
-)( QueryPosts );
+export default QueryPosts;

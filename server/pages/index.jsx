@@ -4,7 +4,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Provider } from 'react-redux';
-import { StaticRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
 import { renderToString } from 'react-dom/server';
 import { map } from 'lodash';
 import express from 'express';

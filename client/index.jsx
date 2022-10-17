@@ -4,7 +4,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { hydrate } from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 
 /**
  * Internal dependencies
@@ -12,11 +12,11 @@ import { hydrate } from 'react-dom';
 import App from 'components/app';
 import store from 'state';
 
-hydrate(
+hydrateRoot(
+	document.getElementById('app'),
 	<Provider store={ store }>
 		<BrowserRouter>
 			<App />
 		</BrowserRouter>
-	</Provider>,
-	document.getElementById( 'app' )
+	</Provider>
 );
