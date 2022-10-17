@@ -84,17 +84,6 @@ add_filter( 'rest_prepare_post', function ( $response, $post, $request ) {
 	return $response;
 }, 10, 3 );
 
-function andromeda_get_post_images( $post_id ) {
-	$media = get_attached_media( 'image', $post_id );
-
-	return array_combine(
-		array_map( function ( $attachment ) {
-			return $attachment->ID;
-		}, $media ),
-		$media
-	);
-}
-
 add_action( 'init', function () {
 	register_rest_route( 'andromeda/v1', '/posts/(?P<slug>[a-zA-Z0-9-]+)/images', [
 		'methods' => [ 'GET' ],
@@ -115,18 +104,28 @@ add_action( 'init', function () {
 
 			preg_match_all( '/<!-- wp:image (.*) -->/', $post->post_content, $matches );
 			$content_images = array_map( function ( $match ) {
-				return json_decode( $match );
+				return json_decode( $match, true );
 			}, $matches[ 1 ] );
 
 			$gallery = array_filter( $content_images, function ( $image ) {
 				return $image &&
-					isset( $image->linkDestination ) &&
-					$image->linkDestination === 'attachment';
+					isset( $image['linkDestination'] ) &&
+					$image['linkDestination'] === 'attachment';
 			} );
 
-			$post_images = andromeda_get_post_images( $post->ID );
+			$post_images = get_posts( [
+				'include' => array_column( $gallery, 'id' ),
+				'post_type' => 'attachment',
+			] );
+			$post_images = array_combine(
+				array_map( function ( $post ) {
+					return $post->ID;
+				}, $post_images ),
+				$post_images
+			);
+
 			return array_map( function ( $gallery_image ) use ( $post_images ) {
-				$image = $post_images[ $gallery_image->id ];
+				$image = $post_images[ $gallery_image['id'] ];
 				$meta = wp_get_attachment_metadata( $image->ID );
 
 				return [
