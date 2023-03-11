@@ -1,4 +1,6 @@
 var path = require( 'path' );
+var webpack = require( 'webpack' );
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 var APP_DIR = path.resolve( __dirname, 'client' );
 var BUILD_DIR = path.resolve( __dirname, 'public' );
@@ -34,6 +36,12 @@ var config = {
 			'app-settings': path.resolve( __dirname, 'config',  settingsFile )
 		},
 	},
+	plugins: [
+	],
 };
+
+if ( process.env.BUNDLE_ANALYSIS ) {
+	config.plugins.push( new BundleAnalyzerPlugin() );
+}
 
 module.exports = config;

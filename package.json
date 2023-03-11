@@ -49,7 +49,7 @@
     "build-css": "run-p -s build-css:*",
     "build-css:debug": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js --include-path client --source-map \"public/styles-debug.css.map\" assets/stylesheets/styles.scss public/styles-debug.css",
     "build-css:style": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js --include-path client assets/stylesheets/styles.scss public/styles.min.css --output-style compressed",
-    "build-client": "webpack --display errors-only",
+    "build-client": "webpack",
     "build-client:dev": "webpack --watch --inline --progress",
     "build-server": "webpack --display errors-only --config webpack.config.node.js",
     "server": "npm run build-server && node build/server.js",
@@ -65,5 +65,8 @@
   "bugs": {
     "url": "https://github.com/ice9js/andromeda/issues"
   },
-  "homepage": "https://themissingsemicolon.blog"
+  "homepage": "https://themissingsemicolon.blog",
+  "devDependencies": {
+    "webpack-bundle-analyzer": "^4.8.0"
+  }
 }
