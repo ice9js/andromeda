@@ -1,4 +1,5 @@
 var path = require( 'path' );
+var webpack = require( 'webpack' );
 
 // var ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 // var UglifyJsPlugin = require( 'uglifyjs-webpack-plugin' );
@@ -49,6 +50,10 @@ var config = {
 			'app-settings': path.resolve( __dirname, 'config',  settingsFile )
 		},
 	},
+
+	plugins: [
+		new webpack.optimize.LimitChunkCountPlugin( { maxChunks: 1 } ),
+	],
 
 	stats: {
 		errorDetails: true,
