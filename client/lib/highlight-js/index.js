@@ -33,4 +33,4 @@ const getHighlightJs = () => {
  */
 export const highlightBlock = ( element ) =>
 	getHighlightJs()
-		.then( ( { highlightBlock } ) => highlightBlock( element ) );
+		.then( ( { default: hljs } ) => hljs.highlightBlock( element ) );
