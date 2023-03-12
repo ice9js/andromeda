@@ -10,10 +10,13 @@ var shouldMinify = ! isDevelopment;
 var settingsFile = isDevelopment ? 'development.js' : 'production.js';
 
 var config = {
-	entry: APP_DIR + '/index.jsx',
+	entry: {
+		[ 'app' ]: APP_DIR + '/index.jsx',
+		[ 'service-worker' ]: APP_DIR + '/lib/service-worker/service-worker.js',
+	},
 
 	output: {
-		filename: 'app.js',
+		filename: '[name].js',
 		path: BUILD_DIR,
 		publicPath: 'andromeda/',
 	},

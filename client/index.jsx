@@ -11,6 +11,7 @@ import { hydrateRoot } from 'react-dom/client';
  */
 import App from 'components/app';
 import store from 'state';
+import { installServiceWorker } from 'lib/service-worker';
 
 hydrateRoot(
 	document.getElementById('app'),
@@ -20,3 +21,5 @@ hydrateRoot(
 		</BrowserRouter>
 	</Provider>
 );
+
+installServiceWorker();

@@ -19,7 +19,11 @@ function boot() {
 	app.enable( 'trust proxy' );
 
 	if ( isDevelopment() ) {
-		app.use( '/andromeda', express.static( 'public' ) );
+		app.use( '/andromeda', express.static( 'public', {
+			setHeaders: function( response, path ) {
+				response.set( 'Service-Worker-Allowed', '/' );
+			}
+		} ) );
 		app.use( '/assets', express.static( 'assets' ) );
 	}
 
