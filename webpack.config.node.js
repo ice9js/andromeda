@@ -42,14 +42,16 @@ var config = {
 		extensions: [ '.json', '.js', '.jsx' ],
 		modules: [
 			APP_DIR,
-			// ASSETS_DIR,
 			SERVER_DIR,
 			'node_modules',
-			// path.resolve( __dirname, 'node_modules' )
 		],
 		alias: {
 			'app-settings': path.resolve( __dirname, 'config',  settingsFile )
 		},
+	},
+
+	stats: {
+		errorDetails: true,
 	},
 };
 
