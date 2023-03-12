@@ -2,14 +2,14 @@ const type = {
 	REST: 'rest',
 	IMAGE: 'image',
 	STATIC: 'static',
-	CONTENT: 'content'
+	CONTENT: 'content',
 };
 
 const opts = {
 	prefillAssets: [
 		'/',
 		'/andromeda/styles.min.css',
-		'/img/besidesprogramming-logo.svg',
+		'/andromeda/img/logo.svg',
 		'/andromeda/app.js',
 		'/andromeda/highlightjs.app.js',
 		'/andromeda/browserconfig.xml',
