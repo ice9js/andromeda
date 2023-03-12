@@ -15,7 +15,7 @@ var config = {
 	output: {
 		filename: 'app.js',
 		path: BUILD_DIR,
-		publicPath: '/',
+		publicPath: 'andromeda/',
 	},
 	mode: isDevelopment ? 'development' : 'production',
 	optimization: { minimize: shouldMinify },

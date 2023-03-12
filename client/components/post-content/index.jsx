@@ -3,8 +3,12 @@
  */
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { highlightBlock } from 'highlight.js';
 import { forEach } from 'lodash';
+
+/**
+ * Internal dependencies
+ */
+import { highlightBlock } from 'lib/highlight-js';
 
 const PostContent = ( { content } ) => {
 	const ref = useRef();

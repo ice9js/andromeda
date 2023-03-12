@@ -7,6 +7,8 @@
 /node_modules
 /npm-debug.log
 /public/app.js
+/public/app.js.LICENSE.txt
+/public/highlightjs.app.js
 /public/styles-debug.css
 /public/styles-debug.css.map
 /public/styles.min.css
