@@ -18,7 +18,7 @@ const settings = {
 		host: 'http://andromeda.local/wp-json',
 	},
 	assets: {
-		host: 'https://andromeda.local',
+		host: 'http://andromeda.local',
 		paths: {
 			uploads: '/wp-content/uploads'
 		},
