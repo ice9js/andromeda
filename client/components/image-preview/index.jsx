@@ -54,7 +54,6 @@ const ImagePreview = ( { image, nextUrl, onClose, previousUrl } ) => {
 	}, { domTarget: preview } );
 	useEffect( bind, [ bind ] );
 
-	const url = `https://besidesprogramming.com/wp-content/uploads/${ image.file }`;
 	const classes = classNames( 'image-preview', {
 		'with-controls': showControls,
 	} );
