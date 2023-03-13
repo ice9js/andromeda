@@ -71,7 +71,7 @@ const Document = ( { appHTML, head, preloadedState } ) => (
 				data-preloaded-state={ JSON.stringify( preloadedState ) }
 				dangerouslySetInnerHTML={ appHTML }
 			/>
-			<script type="text/javascript" src="/andromeda/app.js"></script>
+			<script defer type="text/javascript" src="/andromeda/app.js"></script>
 		</body>
 	</html>
 );
