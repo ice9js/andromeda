@@ -19,5 +19,5 @@ export const getLink = ( element ) => element && ( /^a$/i.test( element.nodeName
  */
 export const isLocalLink = ( element ) =>
 	element.href &&
-	! element.target !== '_blank' &&
+	element.target !== '_blank' &&
 	window.location.origin === thru( new URL( element.href ), ( url ) => url.origin );
