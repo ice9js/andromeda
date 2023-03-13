@@ -18,16 +18,21 @@ const opts = {
 	offlinePage: '/',
 	offlineImage: '',
 	allowedOrigins: [
-		self.location.origin,
+		{
+			host: self.location.origin,
+			pattern: /^\/((wp-content\/uploads|wp-json|andromeda)\/(.+))?$/
+		},
 		'https://fonts.googleapis.com',
 		'https://fonts.gstatic.com',
-		'https://maxcdn.bootstrapcdn.com',
-		'https://themissingsemicolon.blog',
+		'https://i0.wp.com',
+		{
+			host: 'https://themissingsemicolon.blog',
+			pattern: /^\/((wp-content\/uploads|wp-json|andromeda)\/(.+))?$/
+		},
 		'https://use.fontawesome.com',
 		'https://www.google-analytics.com',
 		'https://www.googletagmanager.com',
 	],
-	cachePathPattern: /^\/((wp-content\/uploads|wp-json|andromeda)\/(.+))?$/,
 };
 
 /**
@@ -41,7 +46,10 @@ const getResourceType = ( request ) => {
 		return type.REST;
 	}
 
-	if ( acceptHeader.indexOf( 'text/html' ) !== -1 ) {
+	if (
+		acceptHeader.indexOf( 'text/html' ) !== -1 ||
+		url.pathname.startsWith( '/andromeda')
+	) {
 		return type.STATIC;
 	}
 
@@ -59,9 +67,13 @@ const shouldHandleFetch = ( event ) => {
 	const request = event.request;
 	const url = new URL( request.url );
 
-	return request.method === 'GET' &&
-		opts.allowedOrigins.indexOf( url.origin ) !== -1 &&
-		!! opts.cachePathPattern.exec( url.pathname );
+	if ( request.method !== 'GET' ) {
+		return false;
+	}
+
+	const rule = opts.allowedOrigins.find( ( origin ) => origin.host === url.origin );
+
+	return rule && ( ! rule.pattern || rule.pattern.exec( url.pathname ) );
 }
 
 /**
@@ -84,11 +96,11 @@ const addToCache = ( cacheKey, request, response ) => {
 const fetchFromCache = ( event ) => {
 	return caches.match( event.request ).then( ( response ) => {
 		if ( ! response ) {
-			throw new Error( `${event.request.url} not found in cache` );
+			throw new Error( `${ event.request.url } not found in cache` );
 		}
 
 		return response;
-	});
+	} );
 };
 
 /**
@@ -116,7 +128,7 @@ const offlineResponse = ( resourceType ) => {
 /**
  * Install event handler
  */
-self.addEventListener( 'install', event => event.waitUntil(
+self.addEventListener( 'install', ( event ) => event.waitUntil(
 	caches
 		.open( type.STATIC )
 		.then( cache => cache.addAll( opts.prefillAssets ) )
@@ -125,7 +137,7 @@ self.addEventListener( 'install', event => event.waitUntil(
 /**
  * Fetch event handler
  */
-self.addEventListener( 'fetch', event => {
+self.addEventListener( 'fetch', ( event ) => {
 	if ( ! shouldHandleFetch( event ) ) {
 		return;
 	}
@@ -139,4 +151,4 @@ self.addEventListener( 'fetch', event => {
 			.catch( () => fetchFromCache( event ) )
 			.catch( () => offlineResponse( resourceType ) )
 	);
-});
+} );

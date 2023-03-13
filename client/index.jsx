@@ -22,4 +22,4 @@ hydrateRoot(
 	</Provider>
 );
 
-installServiceWorker();
+window.addEventListener( 'load', installServiceWorker );
