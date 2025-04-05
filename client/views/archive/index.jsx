@@ -22,8 +22,8 @@ const Archive = ( props ) => {
 
 	const page = ( params.page && parseInt( params.page, 10 ) ) || 1;
 	const query = {
-		per_page: postsPerPage,
-		offset: ( page - 1 ) * postsPerPage,
+		limit: postsPerPage,
+		page: page,
 	};
 
 	return (

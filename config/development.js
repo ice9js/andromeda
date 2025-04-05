@@ -15,10 +15,11 @@ const settings = {
 		pinterestDefaultImage: 'https://themissingsemicolon.blog/andromeda/img/open-graph-default-image.png',
 	},
 	api: {
-		host: 'http://andromeda.local/wp-json',
+		key: 'f8f545cf815d33698b977cf7ca',
+		host: 'https://andromeda.local/ghost/api/content',
 	},
 	assets: {
-		host: 'http://andromeda.local',
+		host: 'https://andromeda.local',
 		paths: {
 			uploads: '/wp-content/uploads'
 		},

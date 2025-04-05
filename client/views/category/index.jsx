@@ -26,9 +26,9 @@ const Category = ( { categorySlug, ...props } ) => {
 	const page = ( params.page && parseInt( params.page, 10 ) ) || 1;
 	const category = categories[ categorySlug ];
 	const query = {
-		categories: [ category.id ],
-		per_page: postsPerPage,
-		offset: ( page - 1 ) * postsPerPage,
+		filter: `tag:${ category.id }`,
+		limit: postsPerPage,
+		page: page,
 	};
 
 	return (

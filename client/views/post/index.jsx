@@ -24,9 +24,8 @@ const Post = () => {
 	] );
 
 	const query = {
-		_embed: true,
-		per_page: 1,
-		slug,
+		filter: `slug:${ slug }`,
+		limit: 1,
 	};
 
 	return (

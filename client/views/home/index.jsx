@@ -17,7 +17,7 @@ import { getAllPosts, getPostsError, getPostsLoadingStatus } from 'state/posts/s
 const postsPerPage = config( 'posts.perPage' );
 
 const query = {
-	per_page: postsPerPage,
+	limit: postsPerPage,
 };
 
 const Home = ( props ) => (

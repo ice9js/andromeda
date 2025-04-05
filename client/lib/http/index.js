@@ -7,6 +7,7 @@ import { inRange, map, tap, thru, uniqueId, values } from 'lodash';
 /**
  * Internal dependencies
  */
+import { config } from 'config';
 import { headers, queryParams } from './utils';
 
 /**
@@ -58,9 +59,14 @@ const handleSuccess = ( rawResponse ) =>
  */
 export const http = ( options, onSuccess, onError, fromApi = null ) => {
 	let uri = options.path;
+	let params = { ...( options.params || {} ) };
+
+	if ( options.host === config( 'api.host' ) ) {
+		params.key = config( 'api.key' );
+	}
 
 	if ( options.method === 'GET' && options.params ) {
-		uri = `${ options.path }?${ queryParams( options.params ) }`;
+		uri = `${ options.path }?${ queryParams( params ) }`;
 	}
 
 	// Assign a request id

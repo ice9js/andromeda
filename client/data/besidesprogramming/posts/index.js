@@ -11,9 +11,12 @@ const apiHost = config( 'api.host' );
 export const fetchPosts = ( query, onSuccess, onError ) => http(
 	{
 		host: apiHost,
-		path: '/wp/v2/posts',
+		path: '/posts',
 		method: 'GET',
-		params: query,
+		params: {
+			include: 'authors',
+			...query,
+		},
 	},
 	onSuccess,
 	onError,
