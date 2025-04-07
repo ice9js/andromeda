@@ -6,7 +6,7 @@ const settings = {
 	app: {
 		name: 'The Missing Semicolon',
 		description: 'A software engineer\'s journal. By Kuba Birecki.',
-		host: 'themissingsemicolon.local',
+		host: 'andromeda.local',
 		port: 3000,
 		gtmId: 'GTM-KN4FS4P',
 		disqusShortname: 'besidesprogramming-dev',
@@ -34,20 +34,24 @@ const settings = {
 
 		categories: {
 			thoughts: {
-				id: 2,
+				id: 'thoughts',
 				label: 'Thoughts',
+				url: '/thoughts',
 			},
 			programming: {
-				id: 3,
+				id: 'programming',
 				label: 'Programming',
+				url: '/programming',
 			},
 			travel: {
-				id: 4,
+				id: 'travel',
 				label: 'Travel',
+				url: '/travel',
 			},
 			photos: {
-				id: 5,
+				id: 'photos',
 				label: 'Photos',
+				url: '/photos',
 			},
 		},
 	},

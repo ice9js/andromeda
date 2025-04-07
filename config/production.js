@@ -4,27 +4,28 @@
 const settings = {
 	env: 'production',
 	app: {
-		name: 'The Missing Semicolon',
-		description: 'A software engineer\'s journal. By Kuba Birecki.',
-		host: 'https://themissingsemicolon.blog',
+		name: 'ice9js | Kuba Birecki',
+		description: 'A software engineer\'s journal.',
+		host: 'https://ice9js.me/ghost/api/content',
 		port: 3000,
 		gtmId: 'GTM-KN4FS4P',
 		disqusShortname: 'besidesprogramming',
 		twitterHandle: '@ice9js',
-		openGraphImage: 'https://themissingsemicolon.blog/andromeda/img/open-graph-default-image.png',
-		pinterestDefaultImage: 'https://themissingsemicolon.blog/andromeda/img/open-graph-default-image.png',
+		openGraphImage: 'https://ice9js.me/andromeda/img/open-graph-default-image.png',
+		pinterestDefaultImage: 'https://ice9js.me/andromeda/img/open-graph-default-image.png',
 	},
 	api: {
-		host: 'https://themissingsemicolon.blog/wp-json',
+		key: '874b5e900f560e2c3297d463ff',
+		host: 'https://ice9js.me/ghost/api/content',
 	},
 	assets: {
-		host: 'https://themissingsemicolon.blog',
+		host: 'https://ice9js.me',
 		paths: {
-			uploads: '/wp-content/uploads'
+			uploads: ''
 		},
 	},
 	photon: {
-		enabled: true,
+		enabled: false,
 		host: 'https://i0.wp.com',
 		sizes: [ 380, 570, 768, 960, 1150, 1920, 2550 ],
 	},
@@ -33,20 +34,24 @@ const settings = {
 
 		categories: {
 			thoughts: {
-				id: 8,
+				id: 'thoughts',
 				label: 'Thoughts',
+				url: '/thoughts',
 			},
 			programming: {
-				id: 9,
+				id: 'programming',
 				label: 'Programming',
+				url: '/programming',
 			},
 			travel: {
-				id: 10,
+				id: 'travel',
 				label: 'Travel',
+				url: '/travel',
 			},
 			photos: {
-				id: 11,
+				id: 'photos',
 				label: 'Photos',
+				url: '/photos',
 			},
 		},
 	},
@@ -54,12 +59,12 @@ const settings = {
 		{
 			icon: 'rss',
 			title: 'RSS Feed',
-			url: 'https://themissingsemicolon.blog/feed/',
+			url: 'https://ice9js.me/rss/',
 		},
 		{
 			icon: ['fab', 'discord'],
 			title: 'Discord',
-			url: 'https://discord.gg/MdqDBXus2Q',
+			url: 'https://discord.ice9js.me',
 		},
 		{
 			icon: ['fab', 'instagram'],
