@@ -11,7 +11,7 @@ const apiHost = config( 'api.host' );
 export const fetchPosts = ( query, onSuccess, onError ) => http(
 	{
 		host: apiHost,
-		path: '/posts',
+		path: '/posts/',
 		method: 'GET',
 		params: {
 			include: 'authors',
