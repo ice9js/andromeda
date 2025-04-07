@@ -5,27 +5,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { map, noop } from 'lodash';
 
+/**
+ * Internal dependencies
+ */
+import { config } from 'config';
+
 const links = [
 	{
 		label: 'Home',
 		url: '/',
 	},
-	{
-		label: 'Thoughts',
-		url: '/thoughts',
-	},
-	{
-		label: 'Programming',
-		url: '/programming',
-	},
-	{
-		label: 'Travel',
-		url: '/travel',
-	},
-	{
-		label: 'Photos',
-		url: '/photos',
-	},
+	...Object.values( config( 'posts.categories' ) ),
 	{
 		label: 'About',
 		url: '/about',
