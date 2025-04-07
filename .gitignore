@@ -13,3 +13,6 @@
 /public/styles-debug.css
 /public/styles-debug.css.map
 /public/styles.min.css
+
+/docker/ghost/*
+/docker/nginx/ssl/*
