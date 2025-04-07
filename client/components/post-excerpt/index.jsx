@@ -14,7 +14,7 @@ import PostHeader from 'components/post-header';
 const PostExcerpt = ( { post } ) => (
 	<div className="post-excerpt">
 		<PostHeader { ...post } />
-		<PostContent content={ post.excerpt } />
+		<PostContent content={ `<p>${ post.excerpt }</p>` } />
 
 		<div className="post-excerpt__actions">
 			<a className="post-excerpt__read-more" href={ `/${ post.slug }` }>
