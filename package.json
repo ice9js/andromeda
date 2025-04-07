@@ -44,6 +44,7 @@
     "webpack-dev-server": "4.11.1"
   },
   "scripts": {
+    "build": "cross-env-shell NODE_ENV=production \"npm run build-css && npm run build-client && npm run build-server\"",
     "build-css": "run-p -s build-css:*",
     "build-css:debug": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js --include-path client --source-map \"public/styles-debug.css.map\" assets/stylesheets/styles.scss public/styles-debug.css",
     "build-css:style": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js --include-path client assets/stylesheets/styles.scss public/styles.min.css --output-style compressed",
