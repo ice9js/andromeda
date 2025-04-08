@@ -9,7 +9,7 @@ import { decode } from 'he';
 /**
  * Internal dependencies
  */
-import DisqusThread from 'components/disqus-thread';
+import DiscourseEmbed from 'components/discourse-embed';
 import PostContent from 'components/post-content';
 import PostFooter from 'components/post-footer';
 import PostHeader from 'components/post-header';
@@ -31,7 +31,7 @@ const Post = ( { error, loading, post } ) => {
 	}
 
 	return (
-		<React.Fragment>
+		<>
 			<Helmet>
 				<title>{ decode( post.title )  }</title>
 				<meta
@@ -61,8 +61,8 @@ const Post = ( { error, loading, post } ) => {
 			<PostHeader { ...post } />
 			<PostContent content={ post.content } />
 			<PostFooter { ...post } />
-			<DisqusThread id={ post.id } title={ post.title } url={ post.link } />
-		</React.Fragment>
+			<DiscourseEmbed url={ post.link } />
+		</>
 	);
 };
 

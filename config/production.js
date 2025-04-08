@@ -10,6 +10,7 @@ const settings = {
 		port: 3000,
 		gtmId: 'GTM-KN4FS4P',
 		disqusShortname: 'besidesprogramming',
+		discourseUrl: 'https://community.ice9js.me/',
 		twitterHandle: '@ice9js',
 		openGraphImage: 'https://ice9js.me/andromeda/img/open-graph-default-image.png',
 		pinterestDefaultImage: 'https://ice9js.me/andromeda/img/open-graph-default-image.png',
