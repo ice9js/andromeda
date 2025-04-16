@@ -15,7 +15,7 @@ const settings = {
 		pinterestDefaultImage: 'https://themissingsemicolon.blog/andromeda/img/open-graph-default-image.png',
 	},
 	api: {
-		key: 'f8f545cf815d33698b977cf7ca',
+		key: 'cc2abcfe64683d4ed70452e87d',
 		host: 'https://andromeda.local/ghost/api/content',
 	},
 	assets: {

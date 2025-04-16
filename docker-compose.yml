@@ -16,6 +16,7 @@ services:
       NODE_ENV: development
       url: https://andromeda.local
       database__client: sqlite3
+      database__connection__filename: /var/lib/ghost/content/data/ghost.db
     volumes:
       - ./docker/ghost:/var/lib/ghost/content
     networks:
