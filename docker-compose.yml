@@ -22,7 +22,7 @@ services:
       - ghost_network
 
   node:
-    image: node:14
+    image: node:22
     command: npm start
     working_dir: /usr/src/app
     volumes:
