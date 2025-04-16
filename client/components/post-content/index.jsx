@@ -10,28 +10,24 @@ import { forEach } from 'lodash';
  */
 import { highlightBlock } from 'lib/highlight-js';
 
-const PostContent = ( { content } ) => {
+const PostContent = ({ content }) => {
 	const ref = useRef();
 
-	useEffect( () => {
-		if ( typeof window === 'undefined' || ! ref.current ) {
+	useEffect(() => {
+		if (typeof window === 'undefined' || !ref.current) {
 			return;
 		}
 
-		forEach( ref.current.querySelectorAll( 'pre code' ), highlightBlock );
-	}, [ content ] );
+		forEach(ref.current.querySelectorAll('pre code'), highlightBlock);
+	}, [content]);
 
 	return (
-		<div
-			ref={ ref }
-			className="post-content"
-			dangerouslySetInnerHTML={ { __html: content } }>
-		</div>
+		<div ref={ref} className="post-content" dangerouslySetInnerHTML={{ __html: content }}></div>
 	);
-}
+};
 
 PostContent.propTypes = {
 	content: PropTypes.string.isRequired,
-}
+};
 
 export default PostContent;

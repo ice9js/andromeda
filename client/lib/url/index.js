@@ -9,14 +9,15 @@ import { reduce } from 'lodash';
  * @param  {String} queryString Query string
  * @return {Object}             Parsed keys & values
  */
-export const parseQuery = ( queryString ) => reduce(
-	queryString.replace( /^\?/, '' ).split( '&' ),
-	( result, value ) => {
-		const pair = value.split( '=' );
+export const parseQuery = (queryString) =>
+	reduce(
+		queryString.replace(/^\?/, '').split('&'),
+		(result, value) => {
+			const pair = value.split('=');
 
-		result[ pair[ 0 ] ] = decodeURIComponent( pair[ 1 ] );
+			result[pair[0]] = decodeURIComponent(pair[1]);
 
-		return result;
-	},
-	{}
-);
+			return result;
+		},
+		{},
+	);

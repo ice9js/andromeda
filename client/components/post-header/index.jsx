@@ -13,35 +13,38 @@ import ShareButton from 'components/share-button';
 import { formatDate } from 'lib/date';
 import { facebookShareUrl, pinterestShareUrl, twitterShareUrl } from 'lib/social';
 
-const PostHeader = ( { date, image, link, slug, title } ) => (
+const PostHeader = ({ date, image, link, slug, title }) => (
 	<div className="post-header">
 		<h2 className="post-header__title">
-			<a className="post-header__link" href={ `/${ slug }` }>
-				{ decode( title ) }
+			<a className="post-header__link" href={`/${slug}`}>
+				{decode(title)}
 			</a>
 		</h2>
 
 		<div className="post-header__meta">
 			<ShareButton
 				compact
-				className={ 'facebook' }
-				icon={ <Icon icon={ [ 'fab', 'facebook-f' ] } /> }
-				label={ 'Share' }
-				url={ facebookShareUrl( link ) } />
+				className={'facebook'}
+				icon={<Icon icon={['fab', 'facebook-f']} />}
+				label={'Share'}
+				url={facebookShareUrl(link)}
+			/>
 			<ShareButton
 				compact
-				className={ 'twitter' }
-				icon={ <Icon icon={ [ 'fab', 'twitter' ] } /> }
-				label={ 'Tweet' }
-				url={ twitterShareUrl( link, decode( title ) ) } />
+				className={'twitter'}
+				icon={<Icon icon={['fab', 'twitter']} />}
+				label={'Tweet'}
+				url={twitterShareUrl(link, decode(title))}
+			/>
 			<ShareButton
 				compact
-				className={ 'pinterest' }
-				icon={ <Icon icon={ [ 'fab', 'pinterest' ] } /> }
-				label={ 'Pin' }
-				url={ pinterestShareUrl( link, decode( title ), image ) } />
+				className={'pinterest'}
+				icon={<Icon icon={['fab', 'pinterest']} />}
+				label={'Pin'}
+				url={pinterestShareUrl(link, decode(title), image)}
+			/>
 
-			<span className="post-header__date">{ formatDate( date ) }</span>
+			<span className="post-header__date">{formatDate(date)}</span>
 		</div>
 	</div>
 );

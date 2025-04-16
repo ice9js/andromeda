@@ -10,18 +10,15 @@ import PropTypes from 'prop-types';
 import Icon from 'components/icon';
 import ScreenReaderText from 'components/screen-reader-text';
 
-const SocialButton = ( { icon, title, url } ) => (
-	<a className="social-button" href={ url } rel="noopener noreferrer" target="_blank">
-		<ScreenReaderText>{ `${ title } (Opens in a new window)` }</ScreenReaderText>
-		<Icon icon={ icon } />
+const SocialButton = ({ icon, title, url }) => (
+	<a className="social-button" href={url} rel="noopener noreferrer" target="_blank">
+		<ScreenReaderText>{`${title} (Opens in a new window)`}</ScreenReaderText>
+		<Icon icon={icon} />
 	</a>
 );
 
 SocialButton.propTypes = {
-	icon: PropTypes.oneOfType( [
-		PropTypes.string,
-		PropTypes.array,
-	] ).isRequired,
+	icon: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
 	title: PropTypes.string.isRequired,
 	url: PropTypes.string.isRequired,
 };

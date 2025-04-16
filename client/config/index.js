@@ -8,4 +8,4 @@ import { get } from 'lodash';
  */
 import settings from 'app-settings';
 
-export const config = ( key ) => get( settings, key );
+export const config = (key) => get(settings, key);

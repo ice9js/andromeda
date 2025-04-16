@@ -1,51 +1,51 @@
 .error-code {
-  display: flex;
-  flex-direction: column;
-  padding: 0 25px 50px;
-  width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 0 25px 50px;
+	width: 100%;
 
-  @media #{$tablet} {
-    padding: 0 0 50px;
-  }
+	@media #{$tablet} {
+		padding: 0 0 50px;
+	}
 }
 
 .error-code__header {
-  color: $color-gray-100;
-  color: var( --color-accent );
-  font-family: $headers;
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: left;
-  white-space: pre-line;
-  width: 100%;
+	color: $color-gray-100;
+	color: var(--color-accent);
+	font-family: $headers;
+	font-size: 30px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	text-align: left;
+	white-space: pre-line;
+	width: 100%;
 
-  @media #{$tablet} {
-    font-size: 45px;
-  }
+	@media #{$tablet} {
+		font-size: 45px;
+	}
 }
 
 .error-code__message {
-  font-family: $text;
-  margin: 0 0 50px;
-  width: 100%;
-  white-space: pre-line;
+	font-family: $text;
+	margin: 0 0 50px;
+	width: 100%;
+	white-space: pre-line;
 
-  @media #{$tablet} {
-    text-align: left;
-  }
+	@media #{$tablet} {
+		text-align: left;
+	}
 }
 
 .error-code__code {
-  color: $color-gray-20;
-  color: var( --color-text-subtle );
-  font-family: $headers;
-  font-size: 100px;
-  font-weight: bold;
-  text-align: right;
+	color: $color-gray-20;
+	color: var(--color-text-subtle);
+	font-family: $headers;
+	font-size: 100px;
+	font-weight: bold;
+	text-align: right;
 
-  @media #{$tablet} {
-    font-size: 160px;
-    padding: 0 30px;
-  }
+	@media #{$tablet} {
+		font-size: 160px;
+		padding: 0 30px;
+	}
 }

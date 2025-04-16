@@ -1,16 +1,16 @@
 .image-preview {
 	background-color: $color-black;
-	background-color: var( --color-black );
+	background-color: var(--color-black);
 	padding: 0;
 	position: fixed;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
 
 	@media #{$desktop} {
 		background-color: $color-white;
-		background-color: var( --color-background );
+		background-color: var(--color-background);
 		padding: 90px;
 	}
 }
@@ -29,12 +29,12 @@
 }
 
 .image-preview__caption {
-	color: var( --color-text-subtle );
+	color: var(--color-text-subtle);
 	display: none;
 	height: 40px;
 	line-height: 40px;
 	position: absolute;
-		bottom: 25px;
+	bottom: 25px;
 	text-align: center;
 	width: 100%;
 
@@ -44,11 +44,11 @@
 }
 
 .image-preview__button {
-	background-color: rgba( $color-black, .6 );
+	background-color: rgba($color-black, 0.6);
 	border: 0;
 	border-radius: 20px;
 	color: $color-white;
-	color: var( --color-text-inverted );
+	color: var(--color-text-inverted);
 	font-size: 22px;
 	height: 40px;
 	line-height: 40px;
@@ -62,31 +62,31 @@
 	@media #{$desktop} {
 		background-color: transparent;
 		color: $color-gray-100;
-		color: var( --color-neutral );
+		color: var(--color-neutral);
 		display: block;
 
 		&:hover {
-			background-color: rgba( $color-black, .1 );
+			background-color: rgba($color-black, 0.1);
 		}
 	}
 }
 
 .image-preview__button-close {
 	position: absolute;
-		right: 25px;
-		top: 25px;
+	right: 25px;
+	top: 25px;
 }
 
 .image-preview__button-next {
 	margin-top: -20px;
 	position: absolute;
-		right: 25px;
-		top: 50%;
+	right: 25px;
+	top: 50%;
 }
 
 .image-preview__button-prev {
 	margin-top: -20px;
 	position: absolute;
-		left: 25px;
-		top: 50%;
+	left: 25px;
+	top: 50%;
 }

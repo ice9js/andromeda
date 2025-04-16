@@ -9,9 +9,9 @@ import { combineReducers } from 'redux';
 import media from 'state/media/reducers';
 import posts from 'state/posts/reducers';
 
-const rootReducer = combineReducers( {
+const rootReducer = combineReducers({
 	media,
 	posts,
-} );
+});
 
 export default rootReducer;

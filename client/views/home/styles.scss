@@ -1,9 +1,9 @@
 .home-view__view-all {
 	color: $color-gray-100;
-	color: var( --color-accent );
+	color: var(--color-accent);
 	font-family: $headers;
 	font-size: 24px;
 	font-weight: bold;
 	margin: 20px auto 50px;
-	transition: color .2s;
+	transition: color 0.2s;
 }

@@ -10,19 +10,17 @@ import classNames from 'classnames';
  */
 import ScreenReaderText from 'components/screen-reader-text';
 
-const ShareButton = ( { className, compact, icon, label, url } ) => {
-	const buttonClass = classNames( 'share-button', className, { 'is-compact': compact } );
+const ShareButton = ({ className, compact, icon, label, url }) => {
+	const buttonClass = classNames('share-button', className, { 'is-compact': compact });
 
 	return (
-		<a className={ buttonClass } href={ url } rel="noopener noreferrer" target="_blank">
-			{ icon }
-			{ ! compact && (
-				<span className="share-button__label">{ label }</span>
-			) }
-			<ScreenReaderText>{ `${ label } (Opens a new window)` }</ScreenReaderText>
+		<a className={buttonClass} href={url} rel="noopener noreferrer" target="_blank">
+			{icon}
+			{!compact && <span className="share-button__label">{label}</span>}
+			<ScreenReaderText>{`${label} (Opens a new window)`}</ScreenReaderText>
 		</a>
 	);
-}
+};
 
 ShareButton.propTypes = {
 	className: PropTypes.string,

@@ -11,25 +11,25 @@ import { useDispatch } from 'react-redux';
 import { fetchPostImages } from 'data/besidesprogramming/media';
 import { requestPostMedia, requestPostMediaError, updatePostMedia } from 'state/media/actions';
 
-const QueryPostMedia = ( { postSlug } ) => {
-	const [ currentPostSlug, setCurrentPostSlug ] = useState( '' );
+const QueryPostMedia = ({ postSlug }) => {
+	const [currentPostSlug, setCurrentPostSlug] = useState('');
 
 	const dispatch = useDispatch();
 
-	if ( postSlug && postSlug !== currentPostSlug ) {
-		dispatch(requestPostMedia( postSlug ));
+	if (postSlug && postSlug !== currentPostSlug) {
+		dispatch(requestPostMedia(postSlug));
 
 		fetchPostImages(
 			postSlug,
-			( { media } ) => dispatch(updatePostMedia( postSlug, media )),
-			() => dispatch(requestPostMediaError( postSlug ))
+			({ media }) => dispatch(updatePostMedia(postSlug, media)),
+			() => dispatch(requestPostMediaError(postSlug)),
 		);
 
-		setCurrentPostSlug( postSlug );
+		setCurrentPostSlug(postSlug);
 	}
 
 	return null;
-}
+};
 
 QueryPostMedia.propTypes = {
 	postSlug: PropTypes.string.isRequired,

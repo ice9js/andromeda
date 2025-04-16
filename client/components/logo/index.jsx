@@ -4,8 +4,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Logo = ( { size } ) => (
-	<svg className="logo" width={ `${ size }px` } height={ `${ size }px` } viewBox="0 0 705 705" version="1.1" xmlns="http://www.w3.org/2000/svg">
+const Logo = ({ size }) => (
+	<svg
+		className="logo"
+		width={`${size}px`}
+		height={`${size}px`}
+		viewBox="0 0 705 705"
+		version="1.1"
+		xmlns="http://www.w3.org/2000/svg"
+	>
 		<path
 			fill="#121212"
 			stroke="#121212"

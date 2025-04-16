@@ -41,6 +41,6 @@ library.add(
 
 export const getIconsCss = dom.css;
 
-const Icon = ( props ) => <FontAwesomeIcon { ...props } />;
+const Icon = (props) => <FontAwesomeIcon {...props} />;
 
 export default Icon;

@@ -5,7 +5,7 @@
  * @param  {mixed} initialState
  * @return {mixed}
  */
-const maybeUseInitialState = ( state, initialState ) => state === undefined ? initialState : state;
+const maybeUseInitialState = (state, initialState) => (state === undefined ? initialState : state);
 
 /**
  * Creates a reducer function based on the given handlers and initial state
@@ -14,14 +14,13 @@ const maybeUseInitialState = ( state, initialState ) => state === undefined ? in
  * @param  {Object} handlers
  * @return {Function}
  */
-export const createReducer = ( initialState, handlers ) =>
-	( state, action ) => {
-		if ( ! handlers[ action.type ] ) {
-			return maybeUseInitialState( state, initialState );
-		}
+export const createReducer = (initialState, handlers) => (state, action) => {
+	if (!handlers[action.type]) {
+		return maybeUseInitialState(state, initialState);
+	}
 
-		return handlers[ action.type ]( maybeUseInitialState( state, initialState ), action );
-	};
+	return handlers[action.type](maybeUseInitialState(state, initialState), action);
+};
 
 /**
  * Creates a map of reducers over keyed objects
@@ -30,8 +29,9 @@ export const createReducer = ( initialState, handlers ) =>
  * @param  {Function} reducer
  * @return {Function}
  */
-export const keyedReducer = ( key, reducer ) =>
-	( state = {}, action ) => ( {
+export const keyedReducer =
+	(key, reducer) =>
+	(state = {}, action) => ({
 		...state,
-		[ action[ key ] ]: reducer( state[ action[ key ] ], action ),
-	} );
+		[action[key]]: reducer(state[action[key]], action),
+	});

@@ -6,30 +6,31 @@
 		flex-direction: column;
 		padding: 50px 25px 25px;
 		position: fixed;
-			bottom: 0;
-			left: 0;
-			top: 0;
+		bottom: 0;
+		left: 0;
+		top: 0;
 		width: 300px;
 	}
 }
 
 .navigation.is-mobile {
 	background-color: $color-white;
-	background-color: var( --color-background );
+	background-color: var(--color-background);
 	display: flex;
 	flex-direction: row;
 	padding: 25px;
 	position: fixed;
-		left: 0;
-		right: 0;
-		top: -80px;
-	transition: top .2s;
+	left: 0;
+	right: 0;
+	top: -80px;
+	transition: top 0.2s;
 
 	&.is-active {
 		top: 0;
 	}
 
-	.logo, .logo__img {
+	.logo,
+	.logo__img {
 		height: 30px;
 		margin: 0;
 		width: 30px;
@@ -39,7 +40,8 @@
 		padding: 30px 50px;
 		top: -105px;
 
-		.logo, .logo__img {
+		.logo,
+		.logo__img {
 			height: 45px;
 			margin: 0;
 			width: 45px;
@@ -64,18 +66,18 @@
 	border: 0;
 	// is this necessary ?
 	color: $color-gray-80;
-	color: var( --color-text );
+	color: var(--color-text);
 	cursor: pointer;
 	font-size: 20px;
 	height: 30px;
 	position: absolute;
-		right: 25px;
-		top: 25px;
+	right: 25px;
+	top: 25px;
 	z-index: 100;
 
 	.navigation.is-expanded & {
 		color: $color-white;
-		color: var( --color-text-inverted );
+		color: var(--color-text-inverted);
 	}
 
 	@media #{$tablet-wide} {
@@ -88,16 +90,16 @@
 
 .navigation__menu {
 	background-color: $color-gray-100;
-	background-color: var( --color-accent );
+	background-color: var(--color-accent);
 	display: flex;
 	flex-direction: column;
 	padding: 80px 25px 25px;
 	position: fixed;
-		bottom: 0;
-		right: -100%;
-		top: 0;
+	bottom: 0;
+	right: -100%;
+	top: 0;
 	width: 100%;
-	transition: right .2s;
+	transition: right 0.2s;
 
 	.navigation.is-expanded & {
 		right: 0;
@@ -105,7 +107,7 @@
 
 	.navigation__link-anchor {
 		color: $color-white;
-		color: var( --color-text-inverted );
+		color: var(--color-text-inverted);
 	}
 
 	@media #{$tablet} {
@@ -133,7 +135,7 @@
 
 .navigation__link-anchor {
 	color: $color-gray-100;
-	color: var( --color-neutral );
+	color: var(--color-neutral);
 	font-family: $headers;
 	font-size: 36px;
 	height: 42px;
@@ -142,7 +144,7 @@
 
 .navigation__search {
 	color: $color-gray-80;
-	color: var( --color-text );
+	color: var(--color-text);
 	font-family: $headers;
 	font-size: 28px;
 	margin: 0 0 30px;
@@ -150,17 +152,17 @@
 
 	@media #{$desktop} {
 		color: $color-gray-20;
-		color: var( --color-text-subtle );
+		color: var(--color-text-subtle);
 		text-align: left;
-		transition: color .2s;
+		transition: color 0.2s;
 
 		&:hover {
 			color: $color-gray-100;
-			color: var( --color-neutral );
+			color: var(--color-neutral);
 		}
 
 		&::after {
-			content: "...";
+			content: '...';
 			display: inline-block;
 		}
 	}

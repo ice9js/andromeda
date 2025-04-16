@@ -1,13 +1,13 @@
 /**
  * External dependencies
  */
-const express = require( 'express' );
-const path = require( 'path' );
+const express = require('express');
+const path = require('path');
 
 /**
  * Internal dependencies
  */
-const pages = require( 'pages' );
+const pages = require('pages');
 
 function isDevelopment() {
 	return process.env.NODE_ENV === 'development';
@@ -16,18 +16,21 @@ function isDevelopment() {
 function boot() {
 	const app = express();
 
-	app.enable( 'trust proxy' );
+	app.enable('trust proxy');
 
-	if ( isDevelopment() ) {
-		app.use( '/andromeda', express.static( 'public', {
-			setHeaders: function( response, path ) {
-				response.set( 'Service-Worker-Allowed', '/' );
-			}
-		} ) );
-		app.use( '/assets', express.static( 'assets' ) );
+	if (isDevelopment()) {
+		app.use(
+			'/andromeda',
+			express.static('public', {
+				setHeaders: function (response, path) {
+					response.set('Service-Worker-Allowed', '/');
+				},
+			}),
+		);
+		app.use('/assets', express.static('assets'));
 	}
 
-	return app.use( pages.default );
+	return app.use(pages.default);
 }
 
 module.exports = boot;

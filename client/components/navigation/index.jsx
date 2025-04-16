@@ -15,7 +15,7 @@ import Social from './social';
 const Navigation = () => (
 	<div className="navigation">
 		<a className="navigation__logo" href="/">
-			<Logo size={ 120 } />
+			<Logo size={120} />
 			<ScreenReaderText>Logo (Go to homepage)</ScreenReaderText>
 		</a>
 		<Links />

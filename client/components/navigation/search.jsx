@@ -10,8 +10,8 @@ import { noop } from 'lodash';
  */
 import Icon from 'components/icon';
 
-const Search = ( { onClick } ) => (
-	<a className="navigation__search" href="/search" onClick={ onClick }>
+const Search = ({ onClick }) => (
+	<a className="navigation__search" href="/search" onClick={onClick}>
 		Search
 		<Icon className="navigation__search-icon" icon="magnifying-glass" />
 	</a>
@@ -23,6 +23,6 @@ Search.propTypes = {
 
 Search.defaultProps = {
 	onClick: noop,
-}
+};
 
 export default Search;

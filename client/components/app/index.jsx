@@ -21,22 +21,22 @@ import { getLink, isLocalLink } from './utils';
 const App = () => {
 	const navigate = useNavigate();
 
-	const handleClick = ( event ) => {
-		const link = getLink( event.target );
+	const handleClick = (event) => {
+		const link = getLink(event.target);
 
-		if ( link && isLocalLink( link ) ) {
+		if (link && isLocalLink(link)) {
 			event.preventDefault();
-			navigate( new URL( link.href ).pathname );
+			navigate(new URL(link.href).pathname);
 		}
 	};
 
-	useEffect( () => {
-		window && window.addEventListener( 'click', handleClick );
+	useEffect(() => {
+		window && window.addEventListener('click', handleClick);
 
 		return () => {
-			window && window.removeEventListener( 'click', handleClick );
+			window && window.removeEventListener('click', handleClick);
 		};
-	}, [] );
+	}, []);
 
 	return (
 		<div className="app">
@@ -45,26 +45,29 @@ const App = () => {
 
 			<main className="app__content">
 				<Routes>
-					<Route path="/" element={ <Home /> } />
+					<Route path="/" element={<Home />} />
 
-					<Route path="/thoughts" element={ <Category categorySlug="thoughts" /> } />
-					<Route path="/thoughts/:page" element={ <Category categorySlug="thoughts" /> } />
+					<Route path="/thoughts" element={<Category categorySlug="thoughts" />} />
+					<Route path="/thoughts/:page" element={<Category categorySlug="thoughts" />} />
 
-					<Route path="/programming" element={ <Category categorySlug="programming" /> } />
-					<Route path="/programming/:page" element={ <Category categorySlug="programming" /> } />
+					<Route path="/programming" element={<Category categorySlug="programming" />} />
+					<Route
+						path="/programming/:page"
+						element={<Category categorySlug="programming" />}
+					/>
 
-					<Route path="/travel" element={ <Category categorySlug="travel" /> } />
-					<Route path="/travel/:page" element={ <Category categorySlug="travel" /> } />
+					<Route path="/travel" element={<Category categorySlug="travel" />} />
+					<Route path="/travel/:page" element={<Category categorySlug="travel" />} />
 
-					<Route path="/photos" element={ <Category categorySlug="photos" /> } />
-					<Route path="/photos/:page" element={ <Category categorySlug="photos" /> } />
+					<Route path="/photos" element={<Category categorySlug="photos" />} />
+					<Route path="/photos/:page" element={<Category categorySlug="photos" />} />
 
-					<Route path="/all" element={ <Archive /> } />
-					<Route path="/all/:page" element={ <Archive /> } />
+					<Route path="/all" element={<Archive />} />
+					<Route path="/all/:page" element={<Archive />} />
 
-					<Route path="/search" element={ <Search /> } />
+					<Route path="/search" element={<Search />} />
 
-					<Route path="/:slug/*" element={ <Post /> } />
+					<Route path="/:slug/*" element={<Post />} />
 				</Routes>
 			</main>
 		</div>

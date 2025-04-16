@@ -14,25 +14,28 @@ import PostExcerpt from 'components/post-excerpt';
 import PostPlaceholder from 'components/post-placeholder';
 import ErrorView from 'views/error';
 
-const PostsFeed = ( { currentPage, error, loading, paginationBase, posts, total, totalPages } ) => {
-	if ( loading ) {
-		return times( 3, ( n ) => <PostPlaceholder key={ n } /> );
+const PostsFeed = ({ currentPage, error, loading, paginationBase, posts, total, totalPages }) => {
+	if (loading) {
+		return times(3, (n) => <PostPlaceholder key={n} />);
 	}
 
-	if ( error ) {
-		return <ErrorView status={ error } />;
+	if (error) {
+		return <ErrorView status={error} />;
 	}
 
 	return (
 		<React.Fragment>
-			{ map( posts, ( post ) => <PostExcerpt key={ post.slug } post={ post } /> ) }
+			{map(posts, (post) => (
+				<PostExcerpt key={post.slug} post={post} />
+			))}
 
-			{ paginationBase && total !== 0 && (
+			{paginationBase && total !== 0 && (
 				<Pagination
-					currentPage={ currentPage }
-					pages={ totalPages }
-					paginationBase={ paginationBase } />
-			) }
+					currentPage={currentPage}
+					pages={totalPages}
+					paginationBase={paginationBase}
+				/>
+			)}
 		</React.Fragment>
 	);
 };

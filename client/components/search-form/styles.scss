@@ -12,12 +12,12 @@
 
 .search-form__input {
 	border-color: $color-gray-100;
-	border-color: var( --color-primary );
+	border-color: var(--color-primary);
 	border-radius: 0;
 	border-style: solid;
 	border-width: 0 0 1px;
 	color: $color-gray-100;
-	color: var( --color-neutral );
+	color: var(--color-neutral);
 	flex: 1;
 	font-size: 22px;
 	height: 40px;
@@ -28,7 +28,7 @@
 
 	&:placeholder {
 		color: $color-gray-20;
-		color: var( --color-text-subtle );
+		color: var(--color-text-subtle);
 	}
 }
 
@@ -36,11 +36,11 @@
 	background: transparent;
 	border: 0;
 	color: $color-gray-100;
-	color: var( --color-neutral );
+	color: var(--color-neutral);
 	font-size: 22px;
 	height: 40px;
 	line-height: 40px;
 	margin: 0 0 0 15px;
 	padding: 0 8px;
-	transition: color .2s;
+	transition: color 0.2s;
 }

@@ -18,49 +18,44 @@ import {
 	getNextPostImage,
 	getPreviousPostImage,
 	isPostMediaLoading,
-	isPostMediaRequested
+	isPostMediaRequested,
 } from 'state/media/selectors';
 
-const Gallery = ( { postSlug } ) => {
+const Gallery = ({ postSlug }) => {
 	const { imageId } = useParams();
 
 	const navigate = useNavigate();
 
-	const [
-		currentImage,
-		loading,
-		nextImage,
-		previousImage,
-		requested
-	] = useSelector( ( state ) => [
-		getPostImage( state, postSlug, parseInt( imageId, 10 ) ),
-		isPostMediaLoading( state, postSlug ),
-		getNextPostImage( state, postSlug, parseInt( imageId, 10 ) ),
-		getPreviousPostImage( state, postSlug, parseInt( imageId, 10 ) ),
-		isPostMediaRequested( state, postSlug ),
-	] );
+	const [currentImage, loading, nextImage, previousImage, requested] = useSelector((state) => [
+		getPostImage(state, postSlug, parseInt(imageId, 10)),
+		isPostMediaLoading(state, postSlug),
+		getNextPostImage(state, postSlug, parseInt(imageId, 10)),
+		getPreviousPostImage(state, postSlug, parseInt(imageId, 10)),
+		isPostMediaRequested(state, postSlug),
+	]);
 
-	const redirectToPost = () => navigate( `/${ postSlug }` );
+	const redirectToPost = () => navigate(`/${postSlug}`);
 
-	if ( requested && ! loading && ! currentImage ) {
-		return <Navigate to={ `/${ postSlug }` } replace />;
+	if (requested && !loading && !currentImage) {
+		return <Navigate to={`/${postSlug}`} replace />;
 	}
 
 	return (
 		<React.Fragment>
-			<QueryPostMedia postSlug={ postSlug } />
+			<QueryPostMedia postSlug={postSlug} />
 
 			<Helmet>
 				<meta name="robots" content="noindex" />
 			</Helmet>
 
-			{ currentImage && (
+			{currentImage && (
 				<ImagePreview
-					image={ currentImage }
-					nextUrl={ nextImage && `/${ postSlug }/images/${ nextImage.id }` }
-					previousUrl={ previousImage && `/${ postSlug }/images/${ previousImage.id }` }
-					onClose={ redirectToPost } />
-			) }
+					image={currentImage}
+					nextUrl={nextImage && `/${postSlug}/images/${nextImage.id}`}
+					previousUrl={previousImage && `/${postSlug}/images/${previousImage.id}`}
+					onClose={redirectToPost}
+				/>
+			)}
 		</React.Fragment>
 	);
 };

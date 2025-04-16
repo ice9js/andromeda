@@ -11,14 +11,14 @@ import Icon from 'components/icon';
 import PostContent from 'components/post-content';
 import PostHeader from 'components/post-header';
 
-const PostExcerpt = ( { post } ) => (
+const PostExcerpt = ({ post }) => (
 	<div className="post-excerpt">
-		<PostHeader { ...post } />
-		<PostContent content={ `<p>${ post.excerpt }</p>` } />
+		<PostHeader {...post} />
+		<PostContent content={`<p>${post.excerpt}</p>`} />
 
 		<div className="post-excerpt__actions">
-			<a className="post-excerpt__read-more" href={ `/${ post.slug }` }>
-				{ 'Continue reading' }
+			<a className="post-excerpt__read-more" href={`/${post.slug}`}>
+				{'Continue reading'}
 				<Icon className="post-excerpt__read-more-icon" icon="angles-right" />
 			</a>
 		</div>
@@ -26,10 +26,10 @@ const PostExcerpt = ( { post } ) => (
 );
 
 PostExcerpt.propTypes = {
-	post: PropTypes.shape( {
+	post: PropTypes.shape({
 		excerpt: PropTypes.string.isRequired,
 		slug: PropTypes.string.isRequired,
-	} ),
+	}),
 };
 
 export default PostExcerpt;

@@ -10,10 +10,9 @@ import { tap } from 'lodash';
  */
 import { config } from 'config';
 
-const disqusShortname = config( 'app.disqusShortname' );
+const disqusShortname = config('app.disqusShortname');
 
 class DisqusThread extends PureComponent {
-
 	static propTypes = {
 		id: PropTypes.number.isRequired,
 		url: PropTypes.string.isRequired,
@@ -24,7 +23,7 @@ class DisqusThread extends PureComponent {
 		this.loadDisqus();
 	}
 
-	componentDidUpdate( prevProps ) {
+	componentDidUpdate(prevProps) {
 		if (
 			this.props.id === prevProps.id &&
 			this.props.url === prevProps.url &&
@@ -37,25 +36,24 @@ class DisqusThread extends PureComponent {
 	}
 
 	loadDisqus() {
-		if ( typeof window === 'undefined' ) {
+		if (typeof window === 'undefined') {
 			return;
 		}
 
-		if ( ! window.DISQUS ) {
-			return ( document.head || document.body ).appendChild( tap(
-				document.createElement( 'script' ),
-				( disqus ) => {
-					disqus.setAttribute( 'async', true );
-					disqus.setAttribute( 'src', `//${ disqusShortname }.disqus.com/embed.js` );
-				}
-			) );
+		if (!window.DISQUS) {
+			return (document.head || document.body).appendChild(
+				tap(document.createElement('script'), (disqus) => {
+					disqus.setAttribute('async', true);
+					disqus.setAttribute('src', `//${disqusShortname}.disqus.com/embed.js`);
+				}),
+			);
 		}
 
-		window.DISQUS.reset( { reload: true } );
+		window.DISQUS.reset({ reload: true });
 	}
 
 	render() {
-		if ( typeof window !== 'undefined' ) {
+		if (typeof window !== 'undefined') {
 			window.disqus_shortname = disqusShortname;
 			window.disqus_identifier = this.props.id;
 			window.disqus_title = this.props.title;

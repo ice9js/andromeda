@@ -22,18 +22,18 @@ const pendingRequests = {};
  *
  * @return {Array}
  */
-export const getPendingRequests = () => values( pendingRequests );
-
+export const getPendingRequests = () => values(pendingRequests);
 
 /**
  * Handles failed requests
- * 
+ *
  * @param  {Response} error
  * @return {Promise}
  */
-const handleFailure = ( error ) => Promise.reject( {
-	status: ( error && error.status ) || 500,
-} );
+const handleFailure = (error) =>
+	Promise.reject({
+		status: (error && error.status) || 500,
+	});
 
 /**
  * Handles responses of successful requests
@@ -41,12 +41,12 @@ const handleFailure = ( error ) => Promise.reject( {
  * @param  {Response} rawResponse
  * @return {Promise}
  */
-const handleSuccess = ( rawResponse ) =>
-	rawResponse.json().then(
-		( data ) => Promise.resolve( {
-			headers: headers( rawResponse ),
+const handleSuccess = (rawResponse) =>
+	rawResponse.json().then((data) =>
+		Promise.resolve({
+			headers: headers(rawResponse),
 			data,
-		} )
+		}),
 	);
 
 /**
@@ -57,34 +57,34 @@ const handleSuccess = ( rawResponse ) =>
  * @param  {Function} onError
  * @param  {Function} fromApi
  */
-export const http = ( options, onSuccess, onError, fromApi = null ) => {
+export const http = (options, onSuccess, onError, fromApi = null) => {
 	let uri = options.path;
-	let params = { ...( options.params || {} ) };
+	let params = { ...(options.params || {}) };
 
-	if ( options.host === config( 'api.host' ) ) {
-		params.key = config( 'api.key' );
+	if (options.host === config('api.host')) {
+		params.key = config('api.key');
 	}
 
-	if ( options.method === 'GET' && options.params ) {
-		uri = `${ options.path }?${ queryParams( params ) }`;
+	if (options.method === 'GET' && options.params) {
+		uri = `${options.path}?${queryParams(params)}`;
 	}
 
 	// Assign a request id
 	const requestId = uniqueId();
 
 	// Set up the request promise and mark as pending
-	pendingRequests[ requestId ] = fetch( `${ options.host }${ uri }` )
+	pendingRequests[requestId] = fetch(`${options.host}${uri}`)
 		.then(
-			( rawResponse ) => {
-				return inRange( rawResponse.status, 200, 300 )
-					? handleSuccess( rawResponse )
-					: handleFailure( rawResponse );
+			(rawResponse) => {
+				return inRange(rawResponse.status, 200, 300)
+					? handleSuccess(rawResponse)
+					: handleFailure(rawResponse);
 			},
-			( error ) => handleFailure( error, onError ),
+			(error) => handleFailure(error, onError),
 		)
-		.then( ( response ) => typeof fromApi === 'function' ? fromApi( response ) : response )
-		.then( onSuccess, onError )
-		.finally( () => {
-			delete pendingRequests[ requestId ];
-		} );
+		.then((response) => (typeof fromApi === 'function' ? fromApi(response) : response))
+		.then(onSuccess, onError)
+		.finally(() => {
+			delete pendingRequests[requestId];
+		});
 };

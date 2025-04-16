@@ -15,11 +15,11 @@ import { installServiceWorker } from 'lib/service-worker';
 
 hydrateRoot(
 	document.getElementById('app'),
-	<Provider store={ store }>
+	<Provider store={store}>
 		<BrowserRouter>
 			<App />
 		</BrowserRouter>
-	</Provider>
+	</Provider>,
 );
 
-window.addEventListener( 'load', installServiceWorker );
+window.addEventListener('load', installServiceWorker);

@@ -1,5 +1,5 @@
 /**
- * Tracks the promise to 
+ * Tracks the promise to
  *
  * @type {Promise}
  */
@@ -11,7 +11,7 @@ let highlightJs = null;
  * @return {Promise}
  */
 const getHighlightJs = () => {
-	if ( ! highlightJs ) {
+	if (!highlightJs) {
 		highlightJs = import(
 			/* webpackChunkName: "highlightjs" */
 			/* webpackMode: "lazy" */
@@ -19,7 +19,7 @@ const getHighlightJs = () => {
 			'highlight.js'
 		);
 
-		highlightJs.catch( () => 'Failed to load highlight.js' );
+		highlightJs.catch(() => 'Failed to load highlight.js');
 	}
 
 	return highlightJs;
@@ -31,6 +31,5 @@ const getHighlightJs = () => {
  *
  * @param  {Element} element element
  */
-export const highlightBlock = ( element ) =>
-	getHighlightJs()
-		.then( ( { default: hljs } ) => hljs.highlightBlock( element ) );
+export const highlightBlock = (element) =>
+	getHighlightJs().then(({ default: hljs }) => hljs.highlightBlock(element));

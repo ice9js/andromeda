@@ -11,13 +11,13 @@ import classNames from 'classnames';
 import ScreenReaderText from 'components/screen-reader-text';
 import { formatPageUrl } from './utils';
 
-const PageNumber = ( { active, className, page, paginationBase } ) => {
-	const buttonClass = classNames( 'pagination__page-number', { 'is-active': active }, className );
+const PageNumber = ({ active, className, page, paginationBase }) => {
+	const buttonClass = classNames('pagination__page-number', { 'is-active': active }, className);
 
 	return (
-		<a className={ buttonClass } href={ formatPageUrl( paginationBase, page ) }>
+		<a className={buttonClass} href={formatPageUrl(paginationBase, page)}>
 			<ScreenReaderText>Page</ScreenReaderText>
-			{ page }
+			{page}
 		</a>
 	);
 };

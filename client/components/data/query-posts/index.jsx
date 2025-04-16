@@ -13,22 +13,22 @@ import { fetchPosts } from 'data/besidesprogramming/posts';
 import { requestPosts, requestPostsError, updatePosts } from 'state/posts/actions';
 import { getPostsLoadingStatus, getPostsError, getQuery } from 'state/posts/selectors';
 
-const QueryPosts = ( { query } ) => {
+const QueryPosts = ({ query }) => {
 	const dispatch = useDispatch();
 
-	const [ lastQuery, error, loading ] = useSelector( ( state ) => [
-		getQuery( state ),
-		getPostsError( state ),
-		getPostsLoadingStatus( state ),
-	] );
+	const [lastQuery, error, loading] = useSelector((state) => [
+		getQuery(state),
+		getPostsError(state),
+		getPostsLoadingStatus(state),
+	]);
 
-	if ( ! isEqual( query, lastQuery ) && ! loading ) {
-		dispatch(requestPosts( query ));
+	if (!isEqual(query, lastQuery) && !loading) {
+		dispatch(requestPosts(query));
 
 		fetchPosts(
 			query,
-			( { items, total, totalPages } ) => dispatch(updatePosts( items, total, totalPages )),
-			( error ) => dispatch(requestPostsError( error.status ))
+			({ items, total, totalPages }) => dispatch(updatePosts(items, total, totalPages)),
+			(error) => dispatch(requestPostsError(error.status)),
 		);
 	}
 

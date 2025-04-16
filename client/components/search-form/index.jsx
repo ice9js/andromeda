@@ -10,16 +10,16 @@ import { useNavigate } from 'react-router-dom';
  */
 import Icon from 'components/icon';
 
-const SearchForm = ( { defaultQuery } ) => {
-	const [ query, setQuery ] = useState(defaultQuery || '');
+const SearchForm = ({ defaultQuery }) => {
+	const [query, setQuery] = useState(defaultQuery || '');
 
 	const navigate = useNavigate();
 
-	const updateQuery = ( event ) => setQuery( event.target.value );
+	const updateQuery = (event) => setQuery(event.target.value);
 
-	const handleSubmit = ( event ) => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
-		query && navigate( `/search?q=${ encodeURIComponent( query ) }` );
+		query && navigate(`/search?q=${encodeURIComponent(query)}`);
 	};
 
 	return (
@@ -28,14 +28,15 @@ const SearchForm = ( { defaultQuery } ) => {
 			autoComplete="off"
 			action="/search"
 			method="get"
-			onSubmit={ handleSubmit }
+			onSubmit={handleSubmit}
 		>
 			<input
 				className="search-form__input"
 				name="q"
 				placeholder="Search..."
-				value={ query }
-				onChange={ updateQuery } />
+				value={query}
+				onChange={updateQuery}
+			/>
 			<button className="search-form__button" type="submit" title="Search">
 				<Icon icon="magnifying-glass" />
 			</button>

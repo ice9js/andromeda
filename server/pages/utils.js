@@ -1,11 +1,12 @@
 /**
  * External dependencies
  */
- import { trim } from 'lodash';
+import { trim } from 'lodash';
 
-export const renderHTML = ( document ) => trim(
-	`
+export const renderHTML = (document) =>
+	trim(
+		`
 	<!DOCTYPE html>
-	${ document }
-	`
-);
+	${document}
+	`,
+	);

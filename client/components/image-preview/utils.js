@@ -8,9 +8,9 @@ import { filter, join, map } from 'lodash';
  */
 import { config } from 'config';
 
-const photonHost = config( 'photon.host' );
-const photonSizes = config( 'photon.sizes' );
-const uploadsUrl = `${ config( 'assets.host' ) }${ config( 'assets.paths.uploads' ) }`;
+const photonHost = config('photon.host');
+const photonSizes = config('photon.sizes');
+const uploadsUrl = `${config('assets.host')}${config('assets.paths.uploads')}`;
 
 /**
  * Strips the protocol from a url
@@ -18,7 +18,7 @@ const uploadsUrl = `${ config( 'assets.host' ) }${ config( 'assets.paths.uploads
  * @param  {string} url
  * @return {string}
  */
-const stripProtocol = ( url ) => url.replace( /^https?:\/\//, '' );
+const stripProtocol = (url) => url.replace(/^https?:\/\//, '');
 
 /**
  * Returns a Photon URL for the given file URL
@@ -27,10 +27,10 @@ const stripProtocol = ( url ) => url.replace( /^https?:\/\//, '' );
  * @param  {int}    width
  * @return {string}
  */
-const photonize = ( url, width ) => {
-	const photonUrl = `${ photonHost }/${ stripProtocol( url ) }?ssl=1`;
+const photonize = (url, width) => {
+	const photonUrl = `${photonHost}/${stripProtocol(url)}?ssl=1`;
 
-	return width ? `${ photonUrl }&w=${ width }` : photonUrl;
+	return width ? `${photonUrl}&w=${width}` : photonUrl;
 };
 
 /**
@@ -39,10 +39,7 @@ const photonize = ( url, width ) => {
  * @param  {int}   originalWidth
  * @return {Array}
  */
-const availableSizes = ( originalWidth ) => filter(
-	photonSizes,
-	( size ) => size < originalWidth,
-);
+const availableSizes = (originalWidth) => filter(photonSizes, (size) => size < originalWidth);
 
 /**
  * Return the correct img[sizes] property depending on an image's actual width
@@ -52,7 +49,8 @@ const availableSizes = ( originalWidth ) => filter(
  * @param  {int}    originalWidth
  * @return {string}
  */
-export const getSizes = ( originalWidth ) => `(max-width: ${ originalWidth }px) 100vw, ${ originalWidth }px`;
+export const getSizes = (originalWidth) =>
+	`(max-width: ${originalWidth}px) 100vw, ${originalWidth}px`;
 
 /**
  * Returns a valid url for the given file
@@ -62,10 +60,10 @@ export const getSizes = ( originalWidth ) => `(max-width: ${ originalWidth }px) 
  * @param  {int}    width
  * @return {string}
  */
-export const getImageUrl = ( file, width ) => {
-	const url = `${ uploadsUrl }/${ file }`;
+export const getImageUrl = (file, width) => {
+	const url = `${uploadsUrl}/${file}`;
 
-	return config( 'photon.enabled' ) ? photonize( url, width ) : url;
+	return config('photon.enabled') ? photonize(url, width) : url;
 };
 
 /**
@@ -75,14 +73,14 @@ export const getImageUrl = ( file, width ) => {
  * @param  {int}    originalWidth
  * @return {string}
  */
-export const getSrcSet = ( file, originalWidth ) => {
-	if ( ! config( 'photon.enabled' ) ) {
-		return getImageUrl( file );
+export const getSrcSet = (file, originalWidth) => {
+	if (!config('photon.enabled')) {
+		return getImageUrl(file);
 	}
 
-	const sizes = availableSizes( originalWidth );
-	const sizeUrls = map( sizes, ( size ) => `${ getImageUrl( file, size ) } ${ size }w` );
-	const defaultUrl = `${ getImageUrl( file, originalWidth ) } ${ originalWidth }w`;
+	const sizes = availableSizes(originalWidth);
+	const sizeUrls = map(sizes, (size) => `${getImageUrl(file, size)} ${size}w`);
+	const defaultUrl = `${getImageUrl(file, originalWidth)} ${originalWidth}w`;
 
-	return join( [ ...sizeUrls, defaultUrl ], ', ' );
+	return join([...sizeUrls, defaultUrl], ', ');
 };

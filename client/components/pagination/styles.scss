@@ -6,11 +6,12 @@
 	width: 100%;
 }
 
-.pagination__button, .pagination__placeholder {
+.pagination__button,
+.pagination__placeholder {
 	background: transparent;
 	border: 0;
 	color: $color-gray-100;
-	color: var( --color-neutral );
+	color: var(--color-neutral);
 	cursor: pointer;
 	font-weight: bold;
 	font-size: 16px;
@@ -21,10 +22,10 @@
 
 	&.is-active {
 		background-color: $color-gray-100;
-		background-color: var( --color-accent );
+		background-color: var(--color-accent);
 		border-radius: 3px;
 		color: $color-white;
-		color: var( --color-text-inverted );
+		color: var(--color-text-inverted);
 		height: 26px;
 		margin: 0 1px;
 		width: 26px;
@@ -33,9 +34,10 @@
 	&:disabled {
 		cursor: default;
 
-		&:first-child, &:last-child {
+		&:first-child,
+		&:last-child {
 			color: $color-gray-20;
-			color: var( --color-text-subtle );
+			color: var(--color-text-subtle);
 		}
 	}
 }

@@ -17,28 +17,25 @@ import Gallery from './gallery';
 const Post = () => {
 	const { slug } = useParams();
 
-	const [ error, loading, post ] = useSelector( ( state ) => [
-		getPostsError( state ),
-		getPostsLoadingStatus( state ),
-		getPost( state, slug ),
-	] );
+	const [error, loading, post] = useSelector((state) => [
+		getPostsError(state),
+		getPostsLoadingStatus(state),
+		getPost(state, slug),
+	]);
 
 	const query = {
-		filter: `slug:${ slug }`,
+		filter: `slug:${slug}`,
 		limit: 1,
 	};
 
 	return (
 		<Fragment>
-			<QueryPosts query={ query } />
+			<QueryPosts query={query} />
 
-			<PostComponent post={ post } loading={ loading } error={ error } />
+			<PostComponent post={post} loading={loading} error={error} />
 
 			<Routes>
-				<Route
-					path={ `images/:imageId` }
-					element={ <Gallery postSlug={ slug } /> }
-				/>
+				<Route path={`images/:imageId`} element={<Gallery postSlug={slug} />} />
 			</Routes>
 		</Fragment>
 	);

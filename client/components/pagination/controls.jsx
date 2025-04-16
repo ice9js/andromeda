@@ -10,20 +10,20 @@ import { filter, omit } from 'lodash';
  */
 import ScreenReaderText from 'components/screen-reader-text';
 
-const Controls = ( props ) => {
+const Controls = (props) => {
 	const Element = props.disabled ? 'button' : 'a';
 
-	const ommittedProps = filter( [
+	const ommittedProps = filter([
 		'icon',
 		'label',
 		props.disabled && 'href',
-		! props.disabled && 'disabled',
-	] );
+		!props.disabled && 'disabled',
+	]);
 
 	return (
-		<Element { ...omit( props, ommittedProps ) }>
-			{ props.icon }
-			<ScreenReaderText>{ props.label }</ScreenReaderText>
+		<Element {...omit(props, ommittedProps)}>
+			{props.icon}
+			<ScreenReaderText>{props.label}</ScreenReaderText>
 		</Element>
 	);
 };

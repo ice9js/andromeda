@@ -10,15 +10,15 @@ import { Helmet } from 'react-helmet';
  */
 import { config } from 'config';
 
-const HeaderMeta = ( { title, url } ) => (
+const HeaderMeta = ({ title, url }) => (
 	<Helmet>
-		<title>{ `${ title } - ${ config( 'app.name' ) }` }</title>
-		<meta name="description" content={ config( 'app.description' ) } />
+		<title>{`${title} - ${config('app.name')}`}</title>
+		<meta name="description" content={config('app.description')} />
 
-		<meta property="og:url" content={ url } />
-		<meta property="og:title" content={ title } />
-		<meta property="og:description" content={ config( 'app.description' ) } />
-		<meta property="og:image" content={ config( 'app.openGraphImage' ) } />
+		<meta property="og:url" content={url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={config('app.description')} />
+		<meta property="og:image" content={config('app.openGraphImage')} />
 	</Helmet>
 );
 
