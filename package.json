@@ -50,6 +50,7 @@
     "build-client": "webpack",
     "build-client:dev": "webpack --watch --progress",
     "build-server": "webpack --config webpack.config.node.js",
+    "format": "prettier -w ./{client,server}",
     "server": "npm run build-server && node build/server.js",
     "start": "cross-env-shell NODE_ENV=development \"npm run build-css && run-p -s build-client:dev server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -65,6 +66,7 @@
   },
   "homepage": "https://ice9js.me",
   "devDependencies": {
+    "prettier": "3.5.3",
     "webpack-bundle-analyzer": "^4.8.0"
   }
 }
