@@ -1,7 +1,7 @@
 {
-  "name": "themissingsemicolon.blog",
+  "name": "ice9js.me",
   "version": "1.0.0",
-  "description": "Client application for themissingsemicolon.blog",
+  "description": "Frontend for ice9js.me",
   "main": "index.js",
   "dependencies": {
     "@babel/core": "^7.21.0",
@@ -63,7 +63,7 @@
   "bugs": {
     "url": "https://github.com/ice9js/andromeda/issues"
   },
-  "homepage": "https://themissingsemicolon.blog",
+  "homepage": "https://ice9js.me",
   "devDependencies": {
     "webpack-bundle-analyzer": "^4.8.0"
   }
