@@ -4,8 +4,8 @@
 const settings = {
 	env: 'development',
 	app: {
-		name: 'The Missing Semicolon',
-		description: 'A software engineer\'s journal. By Kuba Birecki.',
+		name: 'ice9js | Kuba Birecki',
+		description: 'A software engineer\'s journal.',
 		host: 'andromeda.local',
 		port: 3000,
 		gtmId: 'GTM-KN4FS4P',
@@ -16,7 +16,8 @@ const settings = {
 	},
 	api: {
 		key: 'cc2abcfe64683d4ed70452e87d',
-		host: 'https://andromeda.local/ghost/api/content',
+		host: 'https://andromeda.local',
+		version: 'v5.0',
 	},
 	assets: {
 		host: 'https://andromeda.local',
