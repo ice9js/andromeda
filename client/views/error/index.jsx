@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 /**
  * Internal dependencies
