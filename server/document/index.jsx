@@ -8,11 +8,11 @@ import React from 'react';
  */
 import { config } from 'config';
 
-const Document = ({ appHTML, head, preloadedState }) => (
+const Document = ({ children, head, preloadedState }) => (
 	<html lang="en">
 		<head>
-			{head.title.toComponent()}
-			{head.meta.toComponent()}
+			{head?.title?.toComponent()}
+			{head?.meta?.toComponent()}
 
 			<meta charSet="utf-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -129,11 +129,9 @@ const Document = ({ appHTML, head, preloadedState }) => (
 				/>
 			</noscript>
 
-			<div
-				id="app"
-				data-preloaded-state={JSON.stringify(preloadedState)}
-				dangerouslySetInnerHTML={appHTML}
-			/>
+			<div id="app" data-preloaded-state={JSON.stringify(preloadedState)}>
+				{children}
+			</div>
 			<script defer type="text/javascript" src="/andromeda/app.js"></script>
 		</body>
 	</html>

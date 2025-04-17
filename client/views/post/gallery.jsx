@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router-dom';

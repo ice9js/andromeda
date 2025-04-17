@@ -2,7 +2,6 @@
  * External dependencies
  */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { decode } from 'he';
 
 /**
@@ -13,11 +12,11 @@ import ShareButton from 'components/share-button';
 import { formatDate } from 'lib/date';
 import { facebookShareUrl, pinterestShareUrl, twitterShareUrl } from 'lib/social';
 
-const PostHeader = ({ date, image, link, slug, title }) => (
+const PostHeader = ({ post }) => (
 	<div className="post-header">
 		<h2 className="post-header__title">
-			<a className="post-header__link" href={`/${slug}`}>
-				{decode(title)}
+			<a className="post-header__link" href={`/${post.slug}`}>
+				{decode(post.title)}
 			</a>
 		</h2>
 
@@ -27,34 +26,26 @@ const PostHeader = ({ date, image, link, slug, title }) => (
 				className={'facebook'}
 				icon={<Icon icon={['fab', 'facebook-f']} />}
 				label={'Share'}
-				url={facebookShareUrl(link)}
+				url={facebookShareUrl(post.url)}
 			/>
 			<ShareButton
 				compact
 				className={'twitter'}
 				icon={<Icon icon={['fab', 'twitter']} />}
 				label={'Tweet'}
-				url={twitterShareUrl(link, decode(title))}
+				url={twitterShareUrl(post.url, decode(post.title))}
 			/>
 			<ShareButton
 				compact
 				className={'pinterest'}
 				icon={<Icon icon={['fab', 'pinterest']} />}
 				label={'Pin'}
-				url={pinterestShareUrl(link, decode(title), image)}
+				url={pinterestShareUrl(post.url, decode(post.title), post.feature_image)}
 			/>
 
-			<span className="post-header__date">{formatDate(date)}</span>
+			<span className="post-header__date">{formatDate(post.published_at)}</span>
 		</div>
 	</div>
 );
-
-PostHeader.propTypes = {
-	date: PropTypes.string.isRequired,
-	image: PropTypes.string,
-	link: PropTypes.string.isRequired,
-	slug: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
-};
 
 export default PostHeader;

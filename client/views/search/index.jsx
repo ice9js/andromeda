@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { connect } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import { get } from 'lodash';

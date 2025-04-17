@@ -6,7 +6,7 @@ const settings = {
 	app: {
 		name: 'ice9js | Kuba Birecki',
 		description: 'A software engineer\'s journal.',
-		host: 'https://ice9js.me/ghost/api/content',
+		host: 'https://ice9js.me',
 		port: 3000,
 		gtmId: 'GTM-KN4FS4P',
 		disqusShortname: 'besidesprogramming',
@@ -17,7 +17,8 @@ const settings = {
 	},
 	api: {
 		key: '874b5e900f560e2c3297d463ff',
-		host: 'https://ice9js.me/ghost/api/content',
+		host: 'https://ice9js.me',
+		version: 'v5.0',
 	},
 	assets: {
 		host: 'https://ice9js.me',
