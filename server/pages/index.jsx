@@ -2,11 +2,10 @@
  * External dependencies
  */
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
-import { renderToString } from 'react-dom/server';
-import { map } from 'lodash';
+import { renderToPipeableStream } from 'react-dom/server';
 import express from 'express';
 
 /**
@@ -14,49 +13,33 @@ import express from 'express';
  */
 import App from 'components/app';
 import Document from 'document';
-import { getPendingRequests } from 'lib/http';
 import store from 'state';
-import { renderHTML } from './utils';
-
-const renderPage = (url) =>
-	renderToString(
-		<Provider store={store}>
-			<StaticRouter location={url} context={{}}>
-				<App />
-			</StaticRouter>
-		</Provider>,
-	);
-
-const renderDocument = (appHTML, head, preloadedState) =>
-	renderToString(<Document appHTML={appHTML} head={head} preloadedState={preloadedState} />);
-
-const waitForPendingRequests = () => {
-	if (getPendingRequests().length === 0) {
-		return Promise.resolve();
-	}
-
-	return Promise.all(
-		map(getPendingRequests(), (request) => request.catch(() => Promise.resolve())),
-	).then(waitForPendingRequests);
-};
 
 export default (req, res, next) => {
-	// First render to trigger any async requests
-	renderPage(req.url, {});
+	const helmetContext = {};
 
-	waitForPendingRequests().then(() => {
-		res.send(
-			renderHTML(
-				renderDocument(
-					{
-						__html: renderPage(req.url),
-					},
-					Helmet.renderStatic(),
-					store.getState(),
-				),
-			),
-		);
+	const { pipe } = renderToPipeableStream(
+		<Document head={helmetContext.helmet}>
+			<HelmetProvider context={helmetContext}>
+				<Provider store={store}>
+					<StaticRouter location={req.url}>
+						<App />
+					</StaticRouter>
+				</Provider>
+			</HelmetProvider>
+		</Document>,
+		{
+			onAllReady: () => {
+				res.setHeader('Content-Type', 'text/html');
+				pipe(res);
+			},
+			onError: (err) => {
+				res.statusCode = err.response?.status || 500;
 
-		next();
-	});
+				if (500 <= res.statusCode) {
+					console.error('SSR Error: ', err);
+				}
+			},
+		}
+	);
 };

@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React, { Fragment } from 'react';
+import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -10,34 +10,25 @@ import { useParams } from 'react-router-dom';
  * Internal dependencies
  */
 import PostComponent from 'components/post';
-import QueryPosts from 'components/data/query-posts';
-import { getPostsError, getPostsLoadingStatus, getPost } from 'state/posts/selectors';
+import PostPlaceholder from 'components/post-placeholder';
+import { ghost } from 'data/ice9js.me';
 import Gallery from './gallery';
 
 const Post = () => {
 	const { slug } = useParams();
 
-	const [error, loading, post] = useSelector((state) => [
-		getPostsError(state),
-		getPostsLoadingStatus(state),
-		getPost(state, slug),
-	]);
-
-	const query = {
-		filter: `slug:${slug}`,
-		limit: 1,
-	};
+	const post = ghost.posts.read({ slug }, { include: 'authors' });
 
 	return (
-		<Fragment>
-			<QueryPosts query={query} />
-
-			<PostComponent post={post} loading={loading} error={error} />
+		<>
+			<Suspense fallback={ <PostPlaceholder /> }>
+				<PostComponent post={post} />
+			</Suspense>
 
 			<Routes>
 				<Route path={`images/:imageId`} element={<Gallery postSlug={slug} />} />
 			</Routes>
-		</Fragment>
+		</>
 	);
 };
 

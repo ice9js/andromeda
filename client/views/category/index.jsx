@@ -1,25 +1,19 @@
 /**
  * External dependencies
  */
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
+import { times } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import HeaderMeta from 'components/header-meta';
 import PageHeader from 'components/page-header';
+import PostPlaceholder from 'components/post-placeholder';
 import PostsFeed from 'components/posts-feed';
-import QueryPosts from 'components/data/query-posts';
 import { config } from 'config';
-import {
-	getAllPosts,
-	getPostsError,
-	getPostsLoadingStatus,
-	getPostsTotal,
-	getPostsTotalPages,
-} from 'state/posts/selectors';
+import { ghost } from 'data/ice9js.me';
 
 const categories = config('posts.categories');
 const postsPerPage = config('posts.perPage');
@@ -31,14 +25,16 @@ const Category = ({ categorySlug, ...props }) => {
 
 	const page = (params.page && parseInt(params.page, 10)) || 1;
 	const category = categories[categorySlug];
-	const query = {
+
+	const posts = ghost.posts.browse({
 		filter: `tag:${category.id}`,
+		include: 'authors',
 		limit: postsPerPage,
-		page: page,
-	};
+		page,
+	});
 
 	return (
-		<React.Fragment>
+		<>
 			<HeaderMeta
 				title={`${category.label} - Page ${page}`}
 				url={`${config('app.host')}/${categorySlug}/${page}`}
@@ -46,16 +42,11 @@ const Category = ({ categorySlug, ...props }) => {
 
 			<PageHeader text={category.label} />
 
-			<QueryPosts query={query} />
-			<PostsFeed currentPage={page} paginationBase={categoryUrl(categorySlug)} {...props} />
-		</React.Fragment>
+			<Suspense fallback={times(3, (n) => <PostPlaceholder key={n} />)}>
+				<PostsFeed currentPage={page} paginationBase={categoryUrl(categorySlug)} posts={posts} />
+			</Suspense>
+		</>
 	);
 };
 
-export default connect((state) => ({
-	error: getPostsError(state),
-	loading: getPostsLoadingStatus(state),
-	posts: getAllPosts(state),
-	total: getPostsTotal(state),
-	totalPages: getPostsTotalPages(state),
-}))(Category);
+export default Category;

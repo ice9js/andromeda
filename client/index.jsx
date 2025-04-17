@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { hydrateRoot } from 'react-dom/client';
@@ -15,11 +16,13 @@ import { installServiceWorker } from 'lib/service-worker';
 
 hydrateRoot(
 	document.getElementById('app'),
-	<Provider store={store}>
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-	</Provider>,
+	<HelmetProvider>
+		<Provider store={store}>
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		</Provider>
+	</HelmetProvider>,
 );
 
 window.addEventListener('load', installServiceWorker);

@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React, { useEffect } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import PropTypes from 'prop-types';
 import { Route, Routes } from 'react-router';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +15,7 @@ import Category from 'views/category';
 import Home from 'views/home';
 import MobileNavigation from 'components/navigation/mobile';
 import Navigation from 'components/navigation';
+import ErrorView from 'views/error';
 import Post from 'views/post';
 import Search from 'views/search';
 import { getLink, isLocalLink } from './utils';
@@ -44,31 +46,33 @@ const App = () => {
 			<MobileNavigation />
 
 			<main className="app__content">
-				<Routes>
-					<Route path="/" element={<Home />} />
+				<ErrorBoundary FallbackComponent={ErrorView}>
+					<Routes>
+						<Route path="/" element={<Home />} />
 
-					<Route path="/thoughts" element={<Category categorySlug="thoughts" />} />
-					<Route path="/thoughts/:page" element={<Category categorySlug="thoughts" />} />
+						<Route path="/thoughts" element={<Category categorySlug="thoughts" />} />
+						<Route path="/thoughts/:page" element={<Category categorySlug="thoughts" />} />
 
-					<Route path="/programming" element={<Category categorySlug="programming" />} />
-					<Route
-						path="/programming/:page"
-						element={<Category categorySlug="programming" />}
-					/>
+						<Route path="/programming" element={<Category categorySlug="programming" />} />
+						<Route
+							path="/programming/:page"
+							element={<Category categorySlug="programming" />}
+						/>
 
-					<Route path="/travel" element={<Category categorySlug="travel" />} />
-					<Route path="/travel/:page" element={<Category categorySlug="travel" />} />
+						<Route path="/travel" element={<Category categorySlug="travel" />} />
+						<Route path="/travel/:page" element={<Category categorySlug="travel" />} />
 
-					<Route path="/photos" element={<Category categorySlug="photos" />} />
-					<Route path="/photos/:page" element={<Category categorySlug="photos" />} />
+						<Route path="/photos" element={<Category categorySlug="photos" />} />
+						<Route path="/photos/:page" element={<Category categorySlug="photos" />} />
 
-					<Route path="/all" element={<Archive />} />
-					<Route path="/all/:page" element={<Archive />} />
+						<Route path="/all" element={<Archive />} />
+						<Route path="/all/:page" element={<Archive />} />
 
-					<Route path="/search" element={<Search />} />
+						<Route path="/search" element={<Search />} />
 
-					<Route path="/:slug/*" element={<Post />} />
-				</Routes>
+						<Route path="/:slug/*" element={<Post />} />
+					</Routes>
+				</ErrorBoundary>
 			</main>
 		</div>
 	);

@@ -2,7 +2,6 @@
  * External dependencies
  */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 /**
  * Internal dependencies
@@ -13,7 +12,7 @@ import PostHeader from 'components/post-header';
 
 const PostExcerpt = ({ post }) => (
 	<div className="post-excerpt">
-		<PostHeader {...post} />
+		<PostHeader post={post} />
 		<PostContent content={`<p>${post.excerpt}</p>`} />
 
 		<div className="post-excerpt__actions">
@@ -24,12 +23,5 @@ const PostExcerpt = ({ post }) => (
 		</div>
 	</div>
 );
-
-PostExcerpt.propTypes = {
-	post: PropTypes.shape({
-		excerpt: PropTypes.string.isRequired,
-		slug: PropTypes.string.isRequired,
-	}),
-};
 
 export default PostExcerpt;
