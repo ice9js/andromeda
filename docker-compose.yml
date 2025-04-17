@@ -8,7 +8,9 @@ services:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
       - ./docker/nginx/ssl:/etc/nginx/ssl
     networks:
-      - ghost_network
+      ghost_network:
+        aliases:
+          - andromeda.local
 
   ghost:
     image: ghost:latest
@@ -26,6 +28,8 @@ services:
     image: node:22
     command: npm start
     working_dir: /usr/src/app
+    environment:
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
     volumes:
       - .:/usr/src/app
     networks:
